@@ -6,7 +6,9 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.net.URL;
+import java.util.List;
 import java.util.Vector;
 
 import javax.swing.ImageIcon;
@@ -23,6 +25,8 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.tree.DefaultMutableTreeNode;
 
 import com.data.DataSave;
+import com.data.LeaveInfo;
+import com.data.StaffInfo;
 import com.view.MTable;
 
 public class HRDataPanel extends JPanel {
@@ -77,12 +81,56 @@ public class HRDataPanel extends JPanel {
 				ListSelectionModel.SINGLE_SELECTION);
 		scrollPane.setViewportView(table); 
 		
+		
+		final JButton showAll = new JButton();
+		showAll.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				String excelFilePath = "./doc/Staff.xls";
+				StaffInfo reader = new StaffInfo();
+				List<Object> listBooks = null;
+				try {
+					listBooks = reader.readBooksFromExcelFile(excelFilePath, "Any");
+					System.out.println("listBooks = " + listBooks);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+				Vector<String> columnNames = new Vector<String>();
+				columnNames.add("ID");
+				columnNames.add("Name");
+				columnNames.add("Age");
+				columnNames.add("Title");
+				columnNames.add("Supervisor");
+
+				//Vector<Object> can contain different type of data(String,double,Boolean.etc)
+				Vector<Vector> vecLeave = new Vector<Vector>();
+				for (Object info : listBooks) {
+					Vector<Object> vecStr = new Vector<Object>();  
+					vecStr.add(((StaffInfo) info).getID());
+					vecStr.add(((StaffInfo) info).getName());vecStr.add(((StaffInfo) info).getAge());
+					vecStr.add(((StaffInfo) info).getTitle());vecStr.add(((StaffInfo) info).getSupervisor());
+					vecLeave.add(vecStr);
+//					System.out.println("vecLeave = "+vecLeave);
+					tableModel = new DefaultTableModel(vecLeave, columnNames);
+					
+					table = new MTable(tableModel);
+					table.getSelectionModel().setSelectionMode(
+							ListSelectionModel.SINGLE_SELECTION);
+					scrollPane.setViewportView(table); 
+				}
+			}
+		});
+		showAll.setText("Show All");
+		panel.add(showAll);
+		
 		final JButton addButton = new JButton();
 		addButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 					int row = table.getRowCount();
-					System.out.println("row = "+row);
+
 					if (table.getColumnCount() == 5) {
 						AddAccountItemDialog aaid;
 						aaid = new AddAccountItemDialog(true, "");
@@ -93,7 +141,7 @@ public class HRDataPanel extends JPanel {
 						
 						if (vector != null) {
 							Vector tableRowV = new Vector(vector);
-							System.out.println("vector:"+tableRowV);
+							System.out.println("vector = "+tableRowV);
 							//tableRowV.remove(2);
 							tableRowV.insertElementAt(row + 1, 0);
 							tableModel.addRow(tableRowV);
@@ -108,46 +156,42 @@ public class HRDataPanel extends JPanel {
 		});
 		addButton.setText("Add Staff");
 		panel.add(addButton);
-		
+	
 		final JButton delButton = new JButton();
 		delButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-//				DefaultMutableTreeNode treeNode = (DefaultMutableTreeNode) tree
-//						.getLastSelectedPathComponent();
-//				if (treeNode == null) {
-//					JOptionPane.showMessageDialog(null, "Please choose the info£¡", "Attention",
-//							JOptionPane.INFORMATION_MESSAGE);
-//					return;
-//				} else {
-//					String item = (String) treeNode.getUserObject();
-//					item = item.trim().replace(" ", "");
 					int row = table.getSelectedRow();
-					String name = table.getValueAt(row, 1).toString();
-					int i = JOptionPane.showConfirmDialog(null, "Are you sure to delete¡°"+ name + "¡±£¿", "Attention",
-							JOptionPane.YES_NO_OPTION);
-					if (i == 0) {
-						System.out.println("Ready to delete!");
-						tableModel.removeRow(row);
-						int rowCount = table.getRowCount();
-						if (row < rowCount) {
-							for (int j = row; j < rowCount; j++) {
-								table.setValueAt(j + 1, j, 0);
-							}
-							table.setRowSelectionInterval(row, row);
-						} 
-						else if(rowCount == 0){
+					System.out.println("row = "+row);
+					if(row != -1){
+						String name = table.getValueAt(row, 1).toString();
+						int i = JOptionPane.showConfirmDialog(null, "Are you sure to delete¡°"+ name + "¡±£¿", "Attention",
+								JOptionPane.YES_NO_OPTION);
+						if (i == 0) {
+							System.out.println("Ready to delete!");
+							tableModel.removeRow(row);
+							int rowCount = table.getRowCount();
+							if (row < rowCount) {
+								for (int j = row; j < rowCount; j++) {
+									table.setValueAt(j + 1, j, 0);
+								}
+								table.setRowSelectionInterval(row, row);
+							}else if(rowCount == 0){
 //							System.out.println("row = "+row + "rowcount = "+rowCount);
 //							table.setRowSelectionInterval(0,0);
+							}else{
+								table.setRowSelectionInterval(0, rowCount - 1);
+							}
 						}
-						else{
-							table.setRowSelectionInterval(0, rowCount - 1);
-						}
+					} else{ //row == 0
+						JOptionPane.showMessageDialog(null, "No Staff infomations!");
 					}
 				}
 //			}
 		});
 		delButton.setText("Delte Staff");
 		panel.add(delButton);
+		
+	
 	}
 	
 	public String getparms(String item) {

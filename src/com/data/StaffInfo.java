@@ -12,14 +12,46 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 
-public class LeaveInfo {
+public class StaffInfo {
+	private String ID;
 	private String name;
-	private String startDate;
-	private String endDate;
+	private String age;
+	private String title;
 	private String supervisor;
 
-	public LeaveInfo() {
+	public StaffInfo() {
+	}
 	
+	public String getID() {
+		return ID;
+	}
+	
+	public void setID(String iD) {
+		ID = iD;
+	}
+
+	public String getAge() {
+		return age;
+	}
+
+	public void setAge(String string) {
+		this.age = string;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public String getSupervisor() {
+		return supervisor;
+	}
+
+	public void setSupervisor(String supervisor) {
+		this.supervisor = supervisor;
 	}
 
 	// getters and setters
@@ -31,35 +63,12 @@ public class LeaveInfo {
 		this.name = name;
 	}
 
-	public String getStartDate() {
-		return startDate;
-	}
-
-	public void setStartDate(String startDate) {
-		this.startDate = startDate;
-	}
-
-	public String getEndDate() {
-		return endDate;
-	}
-
-	public void setEndDate(String endDate) {
-		this.endDate = endDate;
-	}
-
-	public String getSupervisor() {
-		return supervisor;
-	}
-	
-	public void setSupervisor(String supervisor) {
-		this.supervisor = supervisor;
-	}
-	
 	public String toString() {
-		Vector<String> vectLeave = new Vector<String>();
+		Vector<Object> vectLeave = new Vector<Object>();
+		vectLeave.add(ID);
 		vectLeave.add(name);
-		vectLeave.add(startDate);
-		vectLeave.add(endDate);
+		vectLeave.add(age);
+		vectLeave.add(title);
 		vectLeave.add(supervisor);
 		return String.valueOf(vectLeave);
 	}
@@ -80,7 +89,7 @@ public class LeaveInfo {
 	}
 
 	public Vector<Object> readBooksFromExcelFile(String excelFilePath, String supName) throws IOException {
-		Vector<Object> listLeave = new Vector<Object>();
+		Vector<Object> staffVector = new Vector<Object>();
 		FileInputStream inputStream = new FileInputStream(new File(excelFilePath));
 
 		Workbook workbook = new HSSFWorkbook(inputStream);
@@ -90,35 +99,38 @@ public class LeaveInfo {
 		while (iterator.hasNext()) {
 			Row nextRow = iterator.next();
 			Iterator<Cell> cellIterator = nextRow.cellIterator();
-			LeaveInfo aBook = new LeaveInfo();
+			StaffInfo aBook = new StaffInfo();
 			while (cellIterator.hasNext()) {
 				Cell nextCell = cellIterator.next();
 				int columnIndex = nextCell.getColumnIndex();
 				switch (columnIndex) {
 				case 0:
-	                aBook.setName((String) getCellValue(nextCell));
-	                break;
-	            case 1:
-	                aBook.setStartDate((String) getCellValue(nextCell));
-	                break;
-	            case 2:
-	                aBook.setEndDate((String) getCellValue(nextCell));
-	                break;
-	            case 3:
-	                aBook.setSupervisor((String) getCellValue(nextCell));
-	                break;
+					aBook.setID((String) getCellValue(nextCell));
+					break;
+				case 1:
+					aBook.setName((String) getCellValue(nextCell));
+					break;
+				case 2:
+					aBook.setAge((String) getCellValue(nextCell));
+					break;
+				case 3:
+					aBook.setTitle((String) getCellValue(nextCell));
+					break;
+				case 4:
+					aBook.setSupervisor((String) getCellValue(nextCell));
+					break;
 				}
 			}
-				if (!supName.equals("Any")) {
-					if (aBook.getSupervisor().equals(supName)) {
-						listLeave.add(aBook);
-					}
-				} else {
-					listLeave.add(aBook);
+			if (!supName.equals("Any")) {
+				if (aBook.getSupervisor().equals(supName)) {
+					staffVector.add(aBook);
 				}
+			} else {
+				staffVector.add(aBook);
 			}
-	    workbook.close();
+		}
+		workbook.close();
 	    inputStream.close();
-		return listLeave;
+		return staffVector;
 	}
 }

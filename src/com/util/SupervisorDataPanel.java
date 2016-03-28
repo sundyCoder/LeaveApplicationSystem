@@ -18,7 +18,7 @@ import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
 
 import com.data.LeaveInfo;
-import com.data.RetrieveLeaveInfo;
+import com.test.RetrieveLeaveInfo;
 import com.view.MTable;
 
 public class SupervisorDataPanel extends JPanel {
@@ -58,7 +58,7 @@ public class SupervisorDataPanel extends JPanel {
 
 		//get data
 		String excelFilePath = "./doc/Leave.xls";
-		RetrieveLeaveInfo reader = new RetrieveLeaveInfo();
+		LeaveInfo reader = new LeaveInfo();
 		List<Object> listBooks = null;
 		try {
 			listBooks = reader.readBooksFromExcelFile(excelFilePath, "Eric");
@@ -81,7 +81,6 @@ public class SupervisorDataPanel extends JPanel {
 			vecStr.add(((LeaveInfo) info).getName());vecStr.add(((LeaveInfo) info).getStartDate());
 			vecStr.add(((LeaveInfo) info).getEndDate());vecStr.add(((LeaveInfo) info).getSupervisor());
 			vecStr.add(new Boolean (false));
-//			vecStr.add(new Boolean(false));
 			vecLeave.add(vecStr);
 //			System.out.println("vecLeave = "+vecLeave);
 			tableModel = new DefaultTableModel(vecLeave, columnNames);

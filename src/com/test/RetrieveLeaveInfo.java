@@ -1,9 +1,10 @@
-package com.data;
+package com.test;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Vector;
 
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
@@ -11,6 +12,8 @@ import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
+
+import com.data.LeaveInfo;
 
 public class RetrieveLeaveInfo {
 
@@ -36,12 +39,10 @@ public class RetrieveLeaveInfo {
     Workbook workbook = new HSSFWorkbook(inputStream);
     Sheet firstSheet = workbook.getSheetAt(0);
     Iterator<Row> iterator = firstSheet.iterator();
- 
+    LeaveInfo aBook = new LeaveInfo();
     while (iterator.hasNext()) {
         Row nextRow = iterator.next();
         Iterator<Cell> cellIterator = nextRow.cellIterator();
-        LeaveInfo aBook = new LeaveInfo();
- 
         while (cellIterator.hasNext()) {
             Cell nextCell = cellIterator.next();
             int columnIndex = nextCell.getColumnIndex();
@@ -59,8 +60,12 @@ public class RetrieveLeaveInfo {
                 aBook.setSupervisor((String) getCellValue(nextCell));
                 break;
             }
-        }
-        if(aBook.getSupervisor().equals(supName)){
+        }        
+        if(!supName.equals("Any")){
+        	if(aBook.getSupervisor().equals(supName)){
+        		listLeave.add(aBook);
+        	}
+        }else{
         	listLeave.add(aBook);
         }
     }
@@ -70,12 +75,17 @@ public class RetrieveLeaveInfo {
  
     return listLeave;
 }
+
+	private LeaveInfo LeaveInfo() {
+		// TODO Auto-generated method stub
+		return null;
+	}
     
-	//Testing demo
+//	//Testing demo
 //	public static void main(String[] args) throws IOException {
-//	    String excelFilePath = "Leave.xls";
+//	    String excelFilePath = "./doc/Leave.xls";
 //	    RetrieveLeaveInfo reader = new RetrieveLeaveInfo();
-//	    List<LeaveInfo> listBooks = reader.readBooksFromExcelFile(excelFilePath,"Eric");
+//	    List<Object> listBooks = reader.readBooksFromExcelFile(excelFilePath,"Eric");
 //	    System.out.println(listBooks);
 //	}
 }

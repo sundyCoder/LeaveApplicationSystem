@@ -19,11 +19,13 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTable;
 import javax.swing.JTree;
 import javax.swing.SwingConstants;
 import javax.swing.border.TitledBorder;
 import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeCellRenderer;
 import javax.swing.tree.DefaultTreeModel;
@@ -32,7 +34,6 @@ import javax.swing.tree.TreePath;
 import com.util.HRDataPanel;
 import com.util.StaffDataPanel;
 import com.util.SupervisorDataPanel;
-import com.util.WorkingDir;
 
 public class BaseFrame extends JFrame {
 	
@@ -40,6 +41,8 @@ public class BaseFrame extends JFrame {
 	private JTree tree;
 	final JPanel rightPanel = new JPanel();
 	final JLabel backgroundLabel = new JLabel();
+	private DefaultTableModel tableModel;
+	private JTable table;
 	URL resource;
 	ImageIcon icon;
 	/**
@@ -152,8 +155,9 @@ public class BaseFrame extends JFrame {
 			public void valueChanged(TreeSelectionEvent e) {
 				// TODO Auto-generated method stub
 				rightPanel.removeAll();
+				
 				TreePath treePath = e.getPath();
-				int pathCount = treePath.getPathCount() + 1;
+				int pathCount = treePath.getPathCount();
 				if (pathCount == 2) {
 					rightPanel.add(backgroundLabel, BorderLayout.CENTER);
 				}else{
@@ -162,6 +166,7 @@ public class BaseFrame extends JFrame {
 					if (parentNode.equals("Human Resource")) {
 						if (selectedNode.equals("HRStaff")) {
 							System.out.println("Human Resource->HRStaff");
+							
 							rightPanel.setVisible(true);
 							rightPanel.add(new HRDataPanel(),BorderLayout.CENTER);
 							
@@ -230,4 +235,41 @@ public class BaseFrame extends JFrame {
 		backgroundLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		rightPanel.add(backgroundLabel, BorderLayout.CENTER);
 	}
+	
+//	public void showStaffInfo(){
+//		//get data
+//		String excelFilePath = "./doc/Leave.xls";
+//		RetrieveLeaveInfo reader = new RetrieveLeaveInfo();
+//		List<Object> listBooks = null;
+//		try {
+//			listBooks = reader.readBooksFromExcelFile(excelFilePath, "Eric");
+//			System.out.println("listBooks = " + listBooks);
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//		Vector<String> columnNames = new Vector<String>();
+//		columnNames.add("Name");
+//		columnNames.add("Start Date");
+//		columnNames.add("End Date");
+//		columnNames.add("Supervisor");
+//		columnNames.add("Endorse?");
+//		
+//		//Vector<Object> can contain different type of data(String,double,Boolean.etc)
+//		Vector<Vector> vecLeave = new Vector<Vector>();
+//		for (Object info : listBooks) {
+//			Vector<Object> vecStr = new Vector<Object>();  
+//			vecStr.add(((LeaveInfo) info).getName());vecStr.add(((LeaveInfo) info).getStartDate());
+//			vecStr.add(((LeaveInfo) info).getEndDate());vecStr.add(((LeaveInfo) info).getSupervisor());
+//			vecStr.add(new Boolean (false));
+//			vecLeave.add(vecStr);
+////			System.out.println("vecLeave = "+vecLeave);
+//			tableModel = new DefaultTableModel(vecLeave, columnNames);
+//			
+//			table = new MTable(tableModel);
+//			table.getSelectionModel().setSelectionMode(
+//					ListSelectionModel.SINGLE_SELECTION);
+//			scrollPane.setViewportView(table); 
+//		}
+//	}
 }
