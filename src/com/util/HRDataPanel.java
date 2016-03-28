@@ -53,7 +53,7 @@ public class HRDataPanel extends JPanel {
 		final JLabel leftLabel = new JLabel();
 		leftLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		leftLabel.setHorizontalTextPosition(SwingConstants.CENTER);
-		resource = HRDataPanel.this.getClass().getResource("/img/leftpanel0.JPG");
+		resource = HRDataPanel.this.getClass().getResource("/imgs/leftpanel0.JPG");
 		icon = new ImageIcon(resource);
 		leftLabel.setIcon(icon);
 		splitPane.setLeftComponent(leftLabel);
@@ -100,7 +100,7 @@ public class HRDataPanel extends JPanel {
 							table.setRowSelectionInterval(row, row);
 							
 							//save the staff information to Satff.xls
-						    new DataSave().createXLS(tableModel, "Staff.xls");
+						    new DataSave().createXLS(tableModel, "doc/Staff.xls");
 						}
 						aaid.dispose();
 					}

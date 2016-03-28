@@ -31,6 +31,7 @@ public class SupervisorDataPanel extends JPanel {
 	
 	public SupervisorDataPanel(/*String supName*/){
 		super();
+		
 		setLayout(new BorderLayout());
 		
 		final JPanel panel = new JPanel();
@@ -49,14 +50,14 @@ public class SupervisorDataPanel extends JPanel {
 		final JLabel leftLabel = new JLabel();
 		leftLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		leftLabel.setHorizontalTextPosition(SwingConstants.CENTER);
-		resource = SupervisorDataPanel.this.getClass().getResource("/img/leftpanel2.JPG");
+		resource = SupervisorDataPanel.this.getClass().getResource("/imgs/leftpanel2.JPG");
 		icon = new ImageIcon(resource);
 		leftLabel.setIcon(icon);
 		splitPane.setLeftComponent(leftLabel);
 		
 
 		//get data
-		String excelFilePath = "Leave.xls";
+		String excelFilePath = "./doc/Leave.xls";
 		RetrieveLeaveInfo reader = new RetrieveLeaveInfo();
 		List<Object> listBooks = null;
 		try {
@@ -91,4 +92,5 @@ public class SupervisorDataPanel extends JPanel {
 			scrollPane.setViewportView(table); 
 		}
 	}
+	
 }

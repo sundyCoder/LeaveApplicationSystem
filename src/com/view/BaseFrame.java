@@ -32,6 +32,7 @@ import javax.swing.tree.TreePath;
 import com.util.HRDataPanel;
 import com.util.StaffDataPanel;
 import com.util.SupervisorDataPanel;
+import com.util.WorkingDir;
 
 public class BaseFrame extends JFrame {
 	
@@ -76,7 +77,8 @@ public class BaseFrame extends JFrame {
 		final JLabel label = new JLabel();
 		label.setHorizontalAlignment(SwingConstants.CENTER);
 		label.setHorizontalTextPosition(SwingConstants.CENTER);
-		resource = BaseFrame.this.getClass().getResource("/img/logo.JPG");
+		resource = BaseFrame.this.getClass().getResource("/imgs/logo.JPG");  //"../../imgs/logo.JPG"
+		
 		icon = new ImageIcon(resource);
 		label.setIcon(icon);
 		label.setBorder(new TitledBorder(null, "",
@@ -97,7 +99,7 @@ public class BaseFrame extends JFrame {
 		topPanel.add(buttonPanel, BorderLayout.CENTER);// 将工具栏面板添加到上级面板中
 		
 		final JLabel recordShortcutKeyButton = new JLabel();// 创建进入“Staff Info”的快捷按钮
-		resource = this.getClass().getResource("/img/front.JPG");
+		resource = this.getClass().getResource("/imgs/front.JPG");
 		icon = new ImageIcon(resource);
 		recordShortcutKeyButton.setIcon(icon);
 		buttonPanel.add(recordShortcutKeyButton);
@@ -221,7 +223,7 @@ public class BaseFrame extends JFrame {
 	}
 	
 	public void setBackground(){
-		resource = this.getClass().getResource("/img/back.JPG");
+		resource = this.getClass().getResource("/imgs/back.JPG");
 		icon = new ImageIcon(resource);
 		backgroundLabel.setIcon(icon);
 		backgroundLabel.setHorizontalTextPosition(SwingConstants.CENTER);
