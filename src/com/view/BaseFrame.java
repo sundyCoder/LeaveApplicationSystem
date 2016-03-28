@@ -235,41 +235,4 @@ public class BaseFrame extends JFrame {
 		backgroundLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		rightPanel.add(backgroundLabel, BorderLayout.CENTER);
 	}
-	
-//	public void showStaffInfo(){
-//		//get data
-//		String excelFilePath = "./doc/Leave.xls";
-//		RetrieveLeaveInfo reader = new RetrieveLeaveInfo();
-//		List<Object> listBooks = null;
-//		try {
-//			listBooks = reader.readBooksFromExcelFile(excelFilePath, "Eric");
-//			System.out.println("listBooks = " + listBooks);
-//		} catch (IOException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//		Vector<String> columnNames = new Vector<String>();
-//		columnNames.add("Name");
-//		columnNames.add("Start Date");
-//		columnNames.add("End Date");
-//		columnNames.add("Supervisor");
-//		columnNames.add("Endorse?");
-//		
-//		//Vector<Object> can contain different type of data(String,double,Boolean.etc)
-//		Vector<Vector> vecLeave = new Vector<Vector>();
-//		for (Object info : listBooks) {
-//			Vector<Object> vecStr = new Vector<Object>();  
-//			vecStr.add(((LeaveInfo) info).getName());vecStr.add(((LeaveInfo) info).getStartDate());
-//			vecStr.add(((LeaveInfo) info).getEndDate());vecStr.add(((LeaveInfo) info).getSupervisor());
-//			vecStr.add(new Boolean (false));
-//			vecLeave.add(vecStr);
-////			System.out.println("vecLeave = "+vecLeave);
-//			tableModel = new DefaultTableModel(vecLeave, columnNames);
-//			
-//			table = new MTable(tableModel);
-//			table.getSelectionModel().setSelectionMode(
-//					ListSelectionModel.SINGLE_SELECTION);
-//			scrollPane.setViewportView(table); 
-//		}
-//	}
 }

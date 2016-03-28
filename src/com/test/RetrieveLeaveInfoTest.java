@@ -15,7 +15,7 @@ import org.apache.poi.ss.usermodel.Workbook;
 
 import com.data.LeaveInfo;
 
-public class RetrieveLeaveInfo {
+public class RetrieveLeaveInfoTest {
 
 	private Object getCellValue(Cell cell) {
 		switch (cell.getCellType()) {

@@ -14,7 +14,7 @@ import javax.swing.table.DefaultTableModel;
 import com.data.LeaveInfo;
 import com.view.MTable;
 
-public class SupervisorTable extends JPanel{
+public class SupervisorTableTest extends JPanel{
 	private static final long serialVersionUID = 1L;
 	/**
 	 * Create the GUI and show it. For thread safety, this method should be
@@ -22,7 +22,7 @@ public class SupervisorTable extends JPanel{
 	 */
 	private DefaultTableModel tableModel;
 	private MTable table;
-	public SupervisorTable(Vector<String> columnNames,Vector<Vector> data) {
+	public SupervisorTableTest(Vector<String> columnNames,Vector<Vector> data) {
 		super(new GridLayout(1, 0));
 		tableModel = new DefaultTableModel(data,columnNames);
 		table = new MTable(tableModel);
@@ -39,7 +39,7 @@ public class SupervisorTable extends JPanel{
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		// Create and set up the content pane.
-		SupervisorTable newContentPane = new SupervisorTable(columnNames,vecLeave);
+		SupervisorTableTest newContentPane = new SupervisorTableTest(columnNames,vecLeave);
 		newContentPane.setOpaque(true); // content panes must be opaque
 		frame.setContentPane(newContentPane);
 
@@ -50,7 +50,7 @@ public class SupervisorTable extends JPanel{
 	
 	public static void createTable(){
 		String excelFilePath = "Leave.xls";
-		RetrieveLeaveInfo reader = new RetrieveLeaveInfo();
+		RetrieveLeaveInfoTest reader = new RetrieveLeaveInfoTest();
 		List<Object> listBooks = null;
 		try {
 			listBooks = reader.readBooksFromExcelFile(excelFilePath, "Eric");

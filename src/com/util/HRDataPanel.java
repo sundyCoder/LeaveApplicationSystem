@@ -40,20 +40,19 @@ public class HRDataPanel extends JPanel {
 	Vector vector;
 	URL resource;
 	ImageIcon icon;
-	
-	
-	public HRDataPanel(){
+
+	public HRDataPanel() {
 		super();
 		setLayout(new BorderLayout());
-		
+
 		final JPanel panel = new JPanel();
 		panel.setBackground(Color.WHITE);
 		add(panel, BorderLayout.NORTH);
-		
+
 		final JSplitPane splitPane = new JSplitPane();
 		splitPane.setDividerLocation(130);
 		add(splitPane, BorderLayout.CENTER);
-		
+
 		final JLabel leftLabel = new JLabel();
 		leftLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		leftLabel.setHorizontalTextPosition(SwingConstants.CENTER);
@@ -61,7 +60,7 @@ public class HRDataPanel extends JPanel {
 		icon = new ImageIcon(resource);
 		leftLabel.setIcon(icon);
 		splitPane.setLeftComponent(leftLabel);
-		setVisible(true);		
+		setVisible(true);
 
 		final JScrollPane scrollPane = new JScrollPane();
 		splitPane.setRightComponent(scrollPane);
@@ -77,11 +76,9 @@ public class HRDataPanel extends JPanel {
 		tableModel = new DefaultTableModel(tableValueV, tableColumnV);
 
 		table = new MTable(tableModel);
-		table.getSelectionModel().setSelectionMode(
-				ListSelectionModel.SINGLE_SELECTION);
-		scrollPane.setViewportView(table); 
-		
-		
+		table.getSelectionModel().setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		scrollPane.setViewportView(table);
+
 		final JButton showAll = new JButton();
 		showAll.addActionListener(new ActionListener() {
 			@Override
@@ -96,7 +93,7 @@ public class HRDataPanel extends JPanel {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				
+
 				Vector<String> columnNames = new Vector<String>();
 				columnNames.add("ID");
 				columnNames.add("Name");
@@ -104,143 +101,130 @@ public class HRDataPanel extends JPanel {
 				columnNames.add("Title");
 				columnNames.add("Supervisor");
 
-				//Vector<Object> can contain different type of data(String,double,Boolean.etc)
+				// Vector<Object> can contain different type of
+				// data(String,double,Boolean.etc)
 				Vector<Vector> vecLeave = new Vector<Vector>();
 				for (Object info : listBooks) {
-					Vector<Object> vecStr = new Vector<Object>();  
+					Vector<Object> vecStr = new Vector<Object>();
 					vecStr.add(((StaffInfo) info).getID());
-					vecStr.add(((StaffInfo) info).getName());vecStr.add(((StaffInfo) info).getAge());
-					vecStr.add(((StaffInfo) info).getTitle());vecStr.add(((StaffInfo) info).getSupervisor());
+					vecStr.add(((StaffInfo) info).getName());
+					vecStr.add(((StaffInfo) info).getAge());
+					vecStr.add(((StaffInfo) info).getTitle());
+					vecStr.add(((StaffInfo) info).getSupervisor());
 					vecLeave.add(vecStr);
-//					System.out.println("vecLeave = "+vecLeave);
+					// System.out.println("vecLeave = "+vecLeave);
 					tableModel = new DefaultTableModel(vecLeave, columnNames);
-					
+
 					table = new MTable(tableModel);
-					table.getSelectionModel().setSelectionMode(
-							ListSelectionModel.SINGLE_SELECTION);
-					scrollPane.setViewportView(table); 
+					table.getSelectionModel().setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+					scrollPane.setViewportView(table);
 				}
 			}
 		});
 		showAll.setText("Show All");
 		panel.add(showAll);
-		
+
 		final JButton addButton = new JButton();
 		addButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-					int row = table.getRowCount();
+				int row = table.getRowCount();
 
-					if (table.getColumnCount() == 5) {
-						AddAccountItemDialog aaid;
-						aaid = new AddAccountItemDialog(true, "");
-						Dimension size = Toolkit.getDefaultToolkit().getScreenSize();
-						aaid.setBounds((size.width - 280) / 2,(size.height - 220) / 2, 280, 220);
-						aaid.setVisible(true);
-						vector = aaid.getVector();
-						
-						if (vector != null) {
-							Vector tableRowV = new Vector(vector);
-							System.out.println("vector = "+tableRowV);
-							//tableRowV.remove(2);
-							tableRowV.insertElementAt(row + 1, 0);
-							tableModel.addRow(tableRowV);
-							table.setRowSelectionInterval(row, row);
-							
-							//save the staff information to Satff.xls
-						    new DataSave().createXLS(tableModel, "doc/Staff.xls");
+				if (table.getColumnCount() == 5) {
+					AddAccountItemDialog aaid;
+					aaid = new AddAccountItemDialog(true, "");
+					Dimension size = Toolkit.getDefaultToolkit().getScreenSize();
+					aaid.setBounds((size.width - 280) / 2, (size.height - 220) / 2, 280, 220);
+					aaid.setVisible(true);
+					vector = aaid.getVector();
+					System.out.println("#################vector========" + vector);
+					if (vector != null) {
+						Vector tableRowV = new Vector(vector);
+						// System.out.println("vector = "+tableRowV);
+						String input = (String) vector.elementAt(0);
+						System.out.println("/////////////////" + input);
+						String ckStr = checkInput(input);
+						if (ckStr != null) {
+							if (!ckStr.equals("exist")) {
+								tableRowV.insertElementAt(row + 1, 0);
+								tableModel.addRow(tableRowV);
+								table.setRowSelectionInterval(row, row);
+
+								// save the staff information to Satff.xls
+								new DataSave().createXLS(tableModel, "doc/Staff.xls");
+							}
 						}
-						aaid.dispose();
 					}
+					aaid.dispose();
 				}
+			}
 		});
 		addButton.setText("Add Staff");
 		panel.add(addButton);
-	
+
 		final JButton delButton = new JButton();
 		delButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-					int row = table.getSelectedRow();
-					System.out.println("row = "+row);
-					if(row != -1){
-						String name = table.getValueAt(row, 1).toString();
-						int i = JOptionPane.showConfirmDialog(null, "Are you sure to delete¡°"+ name + "¡±£¿", "Attention",
-								JOptionPane.YES_NO_OPTION);
-						if (i == 0) {
-							System.out.println("Ready to delete!");
-							tableModel.removeRow(row);
-							int rowCount = table.getRowCount();
-							if (row < rowCount) {
-								for (int j = row; j < rowCount; j++) {
-									table.setValueAt(j + 1, j, 0);
-								}
-								table.setRowSelectionInterval(row, row);
-							}else if(rowCount == 0){
-//							System.out.println("row = "+row + "rowcount = "+rowCount);
-//							table.setRowSelectionInterval(0,0);
-							}else{
-								table.setRowSelectionInterval(0, rowCount - 1);
+				int row = table.getSelectedRow();
+				System.out.println("row = " + row);
+				if (row != -1) {
+					String name = table.getValueAt(row, 1).toString();
+					int i = JOptionPane.showConfirmDialog(null, "Are you sure to delete¡°" + name + "¡±£¿", "Attention",
+							JOptionPane.YES_NO_OPTION);
+					if (i == 0) {
+						System.out.println("Ready to delete!");
+						tableModel.removeRow(row);
+						int rowCount = table.getRowCount();
+						if (row < rowCount) {
+							for (int j = row; j < rowCount; j++) {
+								table.setValueAt(j + 1, j, 0);
 							}
+							table.setRowSelectionInterval(row, row);
+							//delete the item from the xls
+						} else if (rowCount == 0) {
+							// System.out.println("row = "+row + "rowcount =
+							// "+rowCount);
+							// table.setRowSelectionInterval(0,0);
+							//delete the item from the xls
+						} else {
+							
+							table.setRowSelectionInterval(0, rowCount - 1);
+							//delete the item from the xls
 						}
-					} else{ //row == 0
-						JOptionPane.showMessageDialog(null, "No Staff infomations!");
 					}
+				} else { // row == 0
+					JOptionPane.showMessageDialog(null, "No Staff infomations!");
 				}
-//			}
+			}
+			// }
 		});
 		delButton.setText("Delte Staff");
 		panel.add(delButton);
-		
-	
+
 	}
-	
-	public String getparms(String item) {
-		String input = "";
-		while (input != null && input.length() == 0) {
-			input = JOptionPane.showInputDialog(null, "Please input" + item + "£º",
-					"add" + item, JOptionPane.INFORMATION_MESSAGE);
-			if (input != null) {
-				if (input.length() == 0) {
-					JOptionPane.showMessageDialog(null, "Please input" + item
-							+ "Information cannot be null", "Attention",
-							JOptionPane.INFORMATION_MESSAGE);
-				} else {
-					for (int i = 0; i < table.getRowCount(); i++) {
-						Object valueAt = table.getValueAt(i, 1);
-						if (input.equals(valueAt.toString())) {
-							table.setRowSelectionInterval(i, i);
-							JOptionPane.showMessageDialog(null, "The" + item
-									+ "already exist£¡", "Attention",
-									JOptionPane.INFORMATION_MESSAGE);
-							input = "";
-						}
-					}
-				}
-			}
-		}
-		return input;
-	}
-	
+
 	public String checkInput(String item) {
 		if (item == null) {
 			System.out.println("null,Checking the input!!!");
 			if (item.length() == 0) {
 				JOptionPane.showMessageDialog(null, "Please input" + item + "Information cannot be null", "Attention",
 						JOptionPane.INFORMATION_MESSAGE);
-			} else {
-				System.out.println("Checking the input!!!");
-				for (int i = 0; i < table.getRowCount(); i++) {
-					Object valueAt = table.getValueAt(i, 1);
-					System.out.println("valueAt = "+valueAt);
-					if (item.equals(valueAt.toString())) {
-						table.setRowSelectionInterval(i, i);
-						JOptionPane.showMessageDialog(null, "The" + item + "already exist£¡", "Attention",
-								JOptionPane.INFORMATION_MESSAGE);
-						item = "";
-					}
+			}
+			return null;
+		} else {
+			System.out.println("Checking the input!!!");
+			for (int i = 0; i < table.getRowCount(); i++) {
+				Object valueAt = table.getValueAt(i, 1);
+				Object bossAt = table.getValueAt(i, 3);
+				System.out.println("valueAt = " + valueAt);
+				if (item.equals(valueAt.toString()) || bossAt.toString().equals("Director")) {
+					table.setRowSelectionInterval(i, i);
+					JOptionPane.showMessageDialog(null, "The " + "["+item + "]"+ " or 'Director' already exist£¡", "Attention",
+							JOptionPane.INFORMATION_MESSAGE);
+					return "exist";
 				}
 			}
 		}
-		return item;
+		return "good";
 	}
 }

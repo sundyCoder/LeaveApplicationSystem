@@ -227,7 +227,4 @@ public class AddAccountItemDialog extends JDialog {
 	public Vector getVector() {
 		return vector;
 	}
-	
-	
-
 }

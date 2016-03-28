@@ -18,7 +18,7 @@ import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
 
 import com.data.LeaveInfo;
-import com.test.RetrieveLeaveInfo;
+import com.test.RetrieveLeaveInfoTest;
 import com.view.MTable;
 
 public class SupervisorDataPanel extends JPanel {

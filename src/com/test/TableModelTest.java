@@ -4,13 +4,13 @@ import java.util.Vector;
 
 import javax.swing.table.AbstractTableModel;
 
-public class TableModel extends AbstractTableModel {
+public class TableModelTest extends AbstractTableModel {
 	private boolean DEBUG = true;
 	
 	private String[] columnNames;
 	private Vector<Vector> data;
 	
-	public TableModel(String[] columnNames,Vector<Vector> data){
+	public TableModelTest(String[] columnNames,Vector<Vector> data){
 		this.columnNames = columnNames;
 		this.data = data;
 	}
