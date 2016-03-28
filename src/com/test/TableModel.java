@@ -1,11 +1,7 @@
 package com.test;
 
-import java.awt.Dimension;
-import java.awt.GridLayout;
 import java.util.Vector;
 
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
 import javax.swing.table.AbstractTableModel;
 
 public class TableModel extends AbstractTableModel {

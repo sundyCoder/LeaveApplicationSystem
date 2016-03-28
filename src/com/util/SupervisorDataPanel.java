@@ -2,42 +2,32 @@ package com.util;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Container;
-import java.awt.Dimension;
-import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.net.URL;
 import java.util.List;
 import java.util.Vector;
 
-import javax.swing.JButton;
-import javax.swing.JOptionPane;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
 import javax.swing.JTable;
-import javax.swing.JTree;
 import javax.swing.ListSelectionModel;
-import javax.swing.event.TreeSelectionEvent;
-import javax.swing.event.TreeSelectionListener;
+import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.tree.DefaultMutableTreeNode;
-import javax.swing.tree.DefaultTreeCellRenderer;
-import javax.swing.tree.DefaultTreeModel;
-import javax.swing.tree.TreeSelectionModel;
 
 import com.data.LeaveInfo;
 import com.data.RetrieveLeaveInfo;
-import com.test.SupervisorTable;
 import com.view.MTable;
-import com.view.SupervisorLogin;
 
 public class SupervisorDataPanel extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 	private DefaultTableModel tableModel;
 	private JTable table;
+	URL resource;
+	ImageIcon icon;
 	
 	public SupervisorDataPanel(/*String supName*/){
 		super();
@@ -54,6 +44,16 @@ public class SupervisorDataPanel extends JPanel {
 
 		final JScrollPane scrollPane = new JScrollPane();
 		splitPane.setRightComponent(scrollPane);
+		
+		
+		final JLabel leftLabel = new JLabel();
+		leftLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		leftLabel.setHorizontalTextPosition(SwingConstants.CENTER);
+		resource = SupervisorDataPanel.this.getClass().getResource("/img/leftpanel2.JPG");
+		icon = new ImageIcon(resource);
+		leftLabel.setIcon(icon);
+		splitPane.setLeftComponent(leftLabel);
+		
 
 		//get data
 		String excelFilePath = "Leave.xls";
@@ -73,21 +73,22 @@ public class SupervisorDataPanel extends JPanel {
 		columnNames.add("Supervisor");
 		columnNames.add("Endorse?");
 		
-		Vector<Vector> vecLeave = new Vector<Vector>();
 		//Vector<Object> can contain different type of data(String,double,Boolean.etc)
-		Vector<Object> vecStr = new Vector<Object>();  
+		Vector<Vector> vecLeave = new Vector<Vector>();
 		for (Object info : listBooks) {
+			Vector<Object> vecStr = new Vector<Object>();  
 			vecStr.add(((LeaveInfo) info).getName());vecStr.add(((LeaveInfo) info).getStartDate());
 			vecStr.add(((LeaveInfo) info).getEndDate());vecStr.add(((LeaveInfo) info).getSupervisor());
-			vecStr.add(new Boolean(false));
+			vecStr.add(new Boolean (false));
+//			vecStr.add(new Boolean(false));
+			vecLeave.add(vecStr);
+//			System.out.println("vecLeave = "+vecLeave);
+			tableModel = new DefaultTableModel(vecLeave, columnNames);
+			
+			table = new MTable(tableModel);
+			table.getSelectionModel().setSelectionMode(
+					ListSelectionModel.SINGLE_SELECTION);
+			scrollPane.setViewportView(table); 
 		}
-		vecLeave.add(vecStr);
-		System.out.println("vecLeave = "+vecLeave);
-		tableModel = new DefaultTableModel(vecLeave, columnNames);
-
-		table = new MTable(tableModel);
-		table.getSelectionModel().setSelectionMode(
-				ListSelectionModel.SINGLE_SELECTION);
-		scrollPane.setViewportView(table); 
 	}
 }

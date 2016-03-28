@@ -1,23 +1,17 @@
 package com.date;
 
 
-import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Calendar;
 import java.util.Date;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.SwingUtilities;
 
 
 import net.sourceforge.jdatepicker.impl.JDatePanelImpl;
 import net.sourceforge.jdatepicker.impl.JDatePickerImpl;
-import net.sourceforge.jdatepicker.impl.SqlDateModel;
-import net.sourceforge.jdatepicker.impl.UtilCalendarModel;
 import net.sourceforge.jdatepicker.impl.UtilDateModel;
 
 /**
@@ -31,11 +25,6 @@ public class JDatePickerDemo extends JFrame implements ActionListener {
 	private JDatePickerImpl datePicker;
 	
 	public JDatePickerDemo() {
-//		super("Calendar Component Demo");
-//		setLayout(new FlowLayout());
-//		
-//		add(new JLabel("Birthday: "));
-		
 		UtilDateModel model = new UtilDateModel();
 		model.setDate(1990, 8, 24);
 		model.setSelected(true);
@@ -54,6 +43,13 @@ public class JDatePickerDemo extends JFrame implements ActionListener {
 		setLocationRelativeTo(null);
 	}
 	
+
+	@Override
+	public void actionPerformed(ActionEvent event) {
+		Date selectedDate = (Date) datePicker.getModel().getValue();
+		JOptionPane.showMessageDialog(this, "The selected date is " + selectedDate);
+	}
+
 //	public static void main(String[] args) {
 //		SwingUtilities.invokeLater(new Runnable() {
 //			
@@ -63,11 +59,4 @@ public class JDatePickerDemo extends JFrame implements ActionListener {
 //			}
 //		});
 //	}
-
-	@Override
-	public void actionPerformed(ActionEvent event) {
-		Date selectedDate = (Date) datePicker.getModel().getValue();
-		JOptionPane.showMessageDialog(this, "The selected date is " + selectedDate);
-	}
-
 }

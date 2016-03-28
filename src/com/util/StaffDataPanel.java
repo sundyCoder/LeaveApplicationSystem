@@ -7,16 +7,19 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.net.URL;
 import java.util.Vector;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
 import javax.swing.JTree;
 import javax.swing.ListSelectionModel;
+import javax.swing.SwingConstants;
 import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
 import javax.swing.table.DefaultTableModel;
@@ -26,6 +29,7 @@ import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreeSelectionModel;
 
 import com.data.DataSave;
+import com.view.BaseFrame;
 import com.view.MTable;
 
 public class StaffDataPanel extends JPanel {
@@ -38,6 +42,8 @@ public class StaffDataPanel extends JPanel {
 	private Vector vector;
 	private JTree tree;
 	private Container treePanel;
+	URL resource;
+	ImageIcon icon;
 	
 	public StaffDataPanel(){
 		super();
@@ -48,8 +54,17 @@ public class StaffDataPanel extends JPanel {
 		add(panel, BorderLayout.NORTH);
 		
 		final JSplitPane splitPane = new JSplitPane();
-		splitPane.setDividerLocation(130);
+		splitPane.setDividerLocation(150);
 		add(splitPane, BorderLayout.CENTER);
+		
+		final JLabel leftLabel = new JLabel();
+		leftLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		leftLabel.setHorizontalTextPosition(SwingConstants.CENTER);
+		resource = StaffDataPanel.this.getClass().getResource("/img/leftpanel1.JPG");
+		icon = new ImageIcon(resource);
+		leftLabel.setIcon(icon);
+		splitPane.setLeftComponent(leftLabel);
+		
 		
 
 		final JScrollPane scrollPane = new JScrollPane();

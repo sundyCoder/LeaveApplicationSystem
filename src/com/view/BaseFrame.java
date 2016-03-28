@@ -16,7 +16,6 @@ import java.net.URISyntaxException;
 import java.net.URL;
 
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -97,7 +96,7 @@ public class BaseFrame extends JFrame {
 				TitledBorder.DEFAULT_POSITION, null, null));// 设置工具栏面板采用的边框样式		
 		topPanel.add(buttonPanel, BorderLayout.CENTER);// 将工具栏面板添加到上级面板中
 		
-		final JButton recordShortcutKeyButton = new JButton();// 创建进入“Staff Info”的快捷按钮
+		final JLabel recordShortcutKeyButton = new JLabel();// 创建进入“Staff Info”的快捷按钮
 		resource = this.getClass().getResource("/img/front.JPG");
 		icon = new ImageIcon(resource);
 		recordShortcutKeyButton.setIcon(icon);
@@ -179,8 +178,13 @@ public class BaseFrame extends JFrame {
 							rightPanel.setVisible(true);
 							
 						} else if (selectedNode.equals("Director")) {
-							System.out.println("Human Resource->Staff");
+							System.out.println("Human Resource->Director");
 							rightPanel.setVisible(false);
+							//Login in to address leave application information
+//							SupervisorLogin supervisor = new SupervisorLogin();
+//							String supName = supervisor.getSupName();
+							rightPanel.add(new SupervisorDataPanel(/*supName*/),BorderLayout.CENTER);
+							rightPanel.setVisible(true);
 						}
 					}else if(parentNode.equals("Help?")){
 						if (selectedNode.equals("About")) {

@@ -29,8 +29,8 @@ public class AddAccountItemDialog extends JDialog {
 	private JTextField nameTextField;
 	private JTextField ageTextField;
 	private Vector vector;
-	ArrayList<String>  strArray;
-	Iterator<String> iter;
+	private ArrayList<String>  strArray;
+	private Iterator<String> iter;
 
 	/**
 	 * Launch the application

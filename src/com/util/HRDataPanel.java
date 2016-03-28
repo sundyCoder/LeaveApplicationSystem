@@ -3,40 +3,24 @@ package com.util;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
+import java.net.URL;
 import java.util.Vector;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
 import javax.swing.JTree;
 import javax.swing.ListSelectionModel;
-import javax.swing.event.TreeSelectionEvent;
-import javax.swing.event.TreeSelectionListener;
+import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.tree.DefaultMutableTreeNode;
-import javax.swing.tree.DefaultTreeCellRenderer;
-import javax.swing.tree.DefaultTreeModel;
-import javax.swing.tree.TreeSelectionModel;
-
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.Comment;
-import org.apache.poi.ss.usermodel.CreationHelper;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.ss.usermodel.Workbook;
 
 import com.data.DataSave;
 import com.view.MTable;
@@ -50,6 +34,9 @@ public class HRDataPanel extends JPanel {
 	private Vector<String> tableColumnV;
 	private Vector<Vector> tableValueV;
 	Vector vector;
+	URL resource;
+	ImageIcon icon;
+	
 	
 	public HRDataPanel(){
 		super();
@@ -62,43 +49,15 @@ public class HRDataPanel extends JPanel {
 		final JSplitPane splitPane = new JSplitPane();
 		splitPane.setDividerLocation(130);
 		add(splitPane, BorderLayout.CENTER);
-
-		final JPanel treePanel = new JPanel();
-		treePanel.setBackground(Color.WHITE);
-		splitPane.setLeftComponent(treePanel);
-		final FlowLayout flowLayout = new FlowLayout();
-		flowLayout.setVgap(30);
-		treePanel.setLayout(flowLayout);
-
-		DefaultMutableTreeNode root = new DefaultMutableTreeNode();
-		root.add(new DefaultMutableTreeNode(" Staff  Info "));
-		root.add(new DefaultMutableTreeNode(" Leave Info"));
-
-		DefaultTreeModel treeModel = new DefaultTreeModel(root);
-		tree = new JTree(treeModel);
-		tree.addTreeSelectionListener(new TreeSelectionListener() {
-			public void valueChanged(TreeSelectionEvent e) {
-//				tableValueV.removeAllElements();
-				DefaultMutableTreeNode treeNode = (DefaultMutableTreeNode) tree
-						.getLastSelectedPathComponent();
-				String name = (String) treeNode.getUserObject();
-				name = name.trim().replace(" ", "");
-				tableModel.setDataVector(tableValueV, tableColumnV);
-				if (table.getRowCount() > 0)
-					table.setRowSelectionInterval(0, 0);
-			}
-		});
 		
-		DefaultTreeCellRenderer treeCellRenderer = new DefaultTreeCellRenderer();// 设置结点的图标、字体和背景色
-		treeCellRenderer.setLeafIcon(new ImageIcon());// 设置叶子结点的图标
-		treeCellRenderer.setClosedIcon(new ImageIcon());// 设置结点折叠时的图标
-		treeCellRenderer.setOpenIcon(new ImageIcon());// 设置结点展开时的图标
-		tree.setCellRenderer(treeCellRenderer);
-		tree.setRowHeight(30);
-		tree.setRootVisible(false);
-		tree.getSelectionModel().setSelectionMode(
-				TreeSelectionModel.SINGLE_TREE_SELECTION);
-		treePanel.add(tree);
+		final JLabel leftLabel = new JLabel();
+		leftLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		leftLabel.setHorizontalTextPosition(SwingConstants.CENTER);
+		resource = HRDataPanel.this.getClass().getResource("/img/leftpanel0.JPG");
+		icon = new ImageIcon(resource);
+		leftLabel.setIcon(icon);
+		splitPane.setLeftComponent(leftLabel);
+		setVisible(true);		
 
 		final JScrollPane scrollPane = new JScrollPane();
 		splitPane.setRightComponent(scrollPane);
@@ -122,25 +81,11 @@ public class HRDataPanel extends JPanel {
 		addButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				// TODO Auto-generated method stub
-				DefaultMutableTreeNode treeNode = (DefaultMutableTreeNode) tree
-						.getLastSelectedPathComponent();
-				if (treeNode == null) {
-					JOptionPane.showMessageDialog(null, "Please Chose one Item!", "Attention",
-							JOptionPane.INFORMATION_MESSAGE);
-					return;
-				}else{
-					String item = (String) treeNode.getUserObject();
-					item = item.trim().replace(" ", "");
 					int row = table.getRowCount();
+					System.out.println("row = "+row);
 					if (table.getColumnCount() == 5) {
 						AddAccountItemDialog aaid;
-//						Vector vector;
-						if (item.equals("Staff Info")) {
-							aaid = new AddAccountItemDialog(true, item);
-						} else {// Other items
-							aaid = new AddAccountItemDialog(false, item);
-						}
+						aaid = new AddAccountItemDialog(true, "");
 						Dimension size = Toolkit.getDefaultToolkit().getScreenSize();
 						aaid.setBounds((size.width - 280) / 2,(size.height - 220) / 2, 280, 220);
 						aaid.setVisible(true);
@@ -160,7 +105,6 @@ public class HRDataPanel extends JPanel {
 						aaid.dispose();
 					}
 				}
-			}
 		});
 		addButton.setText("Add Staff");
 		panel.add(addButton);
@@ -168,15 +112,15 @@ public class HRDataPanel extends JPanel {
 		final JButton delButton = new JButton();
 		delButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				DefaultMutableTreeNode treeNode = (DefaultMutableTreeNode) tree
-						.getLastSelectedPathComponent();
-				if (treeNode == null) {
-					JOptionPane.showMessageDialog(null, "Please choose the info！", "Attention",
-							JOptionPane.INFORMATION_MESSAGE);
-					return;
-				} else {
-					String item = (String) treeNode.getUserObject();
-					item = item.trim().replace(" ", "");
+//				DefaultMutableTreeNode treeNode = (DefaultMutableTreeNode) tree
+//						.getLastSelectedPathComponent();
+//				if (treeNode == null) {
+//					JOptionPane.showMessageDialog(null, "Please choose the info！", "Attention",
+//							JOptionPane.INFORMATION_MESSAGE);
+//					return;
+//				} else {
+//					String item = (String) treeNode.getUserObject();
+//					item = item.trim().replace(" ", "");
 					int row = table.getSelectedRow();
 					String name = table.getValueAt(row, 1).toString();
 					int i = JOptionPane.showConfirmDialog(null, "Are you sure to delete“"+ name + "”？", "Attention",
@@ -200,7 +144,7 @@ public class HRDataPanel extends JPanel {
 						}
 					}
 				}
-			}
+//			}
 		});
 		delButton.setText("Delte Staff");
 		panel.add(delButton);

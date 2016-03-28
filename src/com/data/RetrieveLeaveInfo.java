@@ -3,9 +3,7 @@ package com.data;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Vector;
 
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
@@ -72,50 +70,6 @@ public class RetrieveLeaveInfo {
  
     return listLeave;
 }
-	
-//	public Vector<LeaveInfo> readBooksFromExcelFile(String excelFilePath,String supName) throws IOException {
-//	    Vector<LeaveInfo> listLeave = new Vector<>();
-////		Vector<LeaveInfo> listLeave = new ArrayList<>();
-//	    FileInputStream inputStream = new FileInputStream(new File(excelFilePath));
-//	 
-//	    Workbook workbook = new HSSFWorkbook(inputStream);
-//	    Sheet firstSheet = workbook.getSheetAt(0);
-//	    Iterator<Row> iterator = firstSheet.iterator();
-//	 
-//	    while (iterator.hasNext()) {
-//	        Row nextRow = iterator.next();
-//	        Iterator<Cell> cellIterator = nextRow.cellIterator();
-//	        LeaveInfo aBook = new LeaveInfo();
-//	 
-//	        while (cellIterator.hasNext()) {
-//	            Cell nextCell = cellIterator.next();
-//	            int columnIndex = nextCell.getColumnIndex();
-//	 
-//	            switch (columnIndex) {
-//	            case 0:
-//	                aBook.setName((String) getCellValue(nextCell));
-//	                break;
-//	            case 1:
-//	                aBook.setStartDate((String) getCellValue(nextCell));
-//	                break;
-//	            case 2:
-//	                aBook.setEndDate((String) getCellValue(nextCell));
-//	                break;
-//	            case 3:
-//	                aBook.setSupervisor((String) getCellValue(nextCell));
-//	                break;
-//	            }
-//	        }
-//	        if(aBook.getSupervisor().equals(supName)){
-//	        	listLeave.add(aBook);
-//	        }
-//	    }
-//	 
-//	    workbook.close();
-//	    inputStream.close();
-//	 
-//	    return listLeave;
-//	}
     
 	//Testing demo
 //	public static void main(String[] args) throws IOException {

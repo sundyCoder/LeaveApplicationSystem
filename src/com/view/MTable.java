@@ -19,6 +19,10 @@ public class MTable extends JTable {
 	            return true;
 	        }
 	}
+	
+	 public Class getColumnClass(int c) {
+         return getValueAt(0, c).getClass();
+     }
 
 	@Override
 	// 使表格列不允许重新排列

@@ -45,13 +45,11 @@ public class LeaveInfo {
 	}
  
     public String toString() {
-//    	Vector<Vector> vecLeave = new Vector<Vector>();
     	Vector<String> vectLeave = new Vector<String>();
     	vectLeave.add(name);
     	vectLeave.add(startDate);
     	vectLeave.add(endDate);
     	vectLeave.add(supervisor);
     	return String.valueOf(vectLeave);
-//        return String.format("%s - %s - %s - %s", name, startDate, endDate,supervisor);
     }
 }

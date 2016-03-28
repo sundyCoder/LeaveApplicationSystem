@@ -9,7 +9,6 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
-import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableModel;
 
 import com.data.LeaveInfo;
@@ -70,7 +69,9 @@ public class SupervisorTable extends JPanel{
 		Vector<Vector> vecLeave = new Vector<Vector>();
 		Vector<Object> vecStr = new Vector<Object>();
 		for (Object info : listBooks) {
-			vecStr.add(((LeaveInfo) info).getName());vecStr.add(((LeaveInfo) info).getStartDate());vecStr.add(((LeaveInfo) info).getEndDate());
+			vecStr.add(((LeaveInfo) info).getName());
+			vecStr.add(((LeaveInfo) info).getStartDate());
+			vecStr.add(((LeaveInfo) info).getEndDate());
 			vecStr.add(((LeaveInfo) info).getSupervisor());
 			vecStr.add(new Boolean(false));
 		}
