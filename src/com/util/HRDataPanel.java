@@ -6,6 +6,8 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
@@ -24,7 +26,12 @@ import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.tree.DefaultMutableTreeNode;
 
+import org.apache.poi.hssf.usermodel.HSSFRow;
+import org.apache.poi.hssf.usermodel.HSSFSheet;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+
 import com.data.DataSave;
+import com.data.HSSFReadWrite;
 import com.data.LeaveInfo;
 import com.data.StaffInfo;
 import com.view.MTable;
@@ -191,6 +198,26 @@ public class HRDataPanel extends JPanel {
 							table.setRowSelectionInterval(0, rowCount - 1);
 							//delete the item from the xls
 						}
+					}
+					//delete the item from XLS
+					HSSFWorkbook wb;
+					try {
+						wb = HSSFReadWrite.readFile("doc/Staff.xls");
+						FileOutputStream stream = new FileOutputStream("doc/Staff.xls");
+						HSSFSheet sheet = wb.getSheetAt(0);
+						HSSFRow rowXLS = sheet.getRow(row);
+
+						sheet.removeRow(rowXLS);
+						wb.write(stream);
+						stream.close();
+						wb.close();
+						
+					} catch (FileNotFoundException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
 					}
 				} else { // row == 0
 					JOptionPane.showMessageDialog(null, "No Staff infomations!");
