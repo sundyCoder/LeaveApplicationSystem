@@ -33,7 +33,7 @@ import com.util.HRDataPanel;
 import com.util.StaffDataPanel;
 import com.util.SupervisorDataPanel;
 
-public class BaseFrame extends JFrame {
+public class MainFrame extends JFrame {
 	
 	private static final long serialVersionUID = 1L;
 	private JTree tree;
@@ -48,7 +48,7 @@ public class BaseFrame extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					BaseFrame frame = new BaseFrame();
+					MainFrame frame = new MainFrame();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -60,9 +60,9 @@ public class BaseFrame extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public BaseFrame() {
+	public MainFrame() {
 		setResizable(false);
-		setExtendedState(BaseFrame.MAXIMIZED_BOTH);// 设置窗口以最大化打开
+		setExtendedState(MainFrame.MAXIMIZED_BOTH);// 设置窗口以最大化打开
 		setTitle("Polyu");
 		setBounds(0, 0, 950, 700);
 		setBounds(0, 0, 1024, 768);
@@ -76,7 +76,7 @@ public class BaseFrame extends JFrame {
 		final JLabel label = new JLabel();
 		label.setHorizontalAlignment(SwingConstants.CENTER);
 		label.setHorizontalTextPosition(SwingConstants.CENTER);
-		resource = BaseFrame.this.getClass().getResource("/imgs/logo.JPG");  //"../../imgs/logo.JPG"
+		resource = MainFrame.this.getClass().getResource("/imgs/logo.JPG");  //"../../imgs/logo.JPG"
 		
 		icon = new ImageIcon(resource);
 		label.setIcon(icon);
