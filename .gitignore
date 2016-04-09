@@ -1,5 +1,2 @@
 /bin/
-
-/lib/
-/src/imgs
-/doc/
+/target/

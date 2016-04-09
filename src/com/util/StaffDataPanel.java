@@ -1,3 +1,8 @@
+/*
+ * Author: sundy
+ * e-mail: sundycoder@gmail.com
+ * Date:   March 27,2016
+ */
 package com.util;
 
 import java.awt.BorderLayout;
@@ -20,16 +25,8 @@ import javax.swing.JSplitPane;
 import javax.swing.JTree;
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
-import javax.swing.event.TreeSelectionEvent;
-import javax.swing.event.TreeSelectionListener;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.tree.DefaultMutableTreeNode;
-import javax.swing.tree.DefaultTreeCellRenderer;
-import javax.swing.tree.DefaultTreeModel;
-import javax.swing.tree.TreeSelectionModel;
-
 import com.data.DataSave;
-import com.view.BaseFrame;
 import com.view.MTable;
 
 public class StaffDataPanel extends JPanel {
@@ -86,7 +83,6 @@ public class StaffDataPanel extends JPanel {
 		
 		final JButton LeaveButton = new JButton();
 		LeaveButton.addActionListener(new ActionListener() {
-			@Override
 			public void actionPerformed(ActionEvent arg0) {
 					int row = table.getRowCount();
 					System.out.println("row = "+row);
@@ -106,7 +102,7 @@ public class StaffDataPanel extends JPanel {
 							table.setRowSelectionInterval(row, row);
 							
 							//save the staff information to Satff.xls
-						    new DataSave().createXLS(tableModel, "doc/Leave.xls");
+						    new DataSave().createXLS(tableModel, "Leave.xls");
 						}
 						aaid.dispose();
 					}
@@ -119,6 +115,10 @@ public class StaffDataPanel extends JPanel {
 		delButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 					int row = table.getSelectedRow();
+					if(row == -1){
+						JOptionPane.showMessageDialog(null, "No Staff Information!");
+						return;
+					}
 					String name = table.getValueAt(row, 1).toString();
 					int i = JOptionPane.showConfirmDialog(null, "Are you sure to delete¡°"+ name + "¡±£¿", "Attention",
 							JOptionPane.YES_NO_OPTION);

@@ -1,3 +1,8 @@
+/*
+ * Author: sundy
+ * e-mail: sundycoder@gmail.com
+ * Date:   March 27,2016
+ */
 package com.util;
 
 import java.awt.BorderLayout;
@@ -24,7 +29,6 @@ import javax.swing.JTree;
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.tree.DefaultMutableTreeNode;
 
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
@@ -32,7 +36,6 @@ import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 
 import com.data.DataSave;
 import com.data.HSSFReadWrite;
-import com.data.LeaveInfo;
 import com.data.StaffInfo;
 import com.view.MTable;
 
@@ -41,13 +44,12 @@ public class HRDataPanel extends JPanel {
 	private static final long serialVersionUID = 1L;
 	private DefaultTableModel tableModel;
 	private MTable table;
-	private JTree tree;
 	private Vector<String> tableColumnV;
 	private Vector<Vector> tableValueV;
-	Vector vector;
-	URL resource;
-	ImageIcon icon;
-
+	private Vector vector;
+	private URL resource;
+	private ImageIcon icon;
+	
 	public HRDataPanel() {
 		super();
 		setLayout(new BorderLayout());
@@ -88,9 +90,8 @@ public class HRDataPanel extends JPanel {
 
 		final JButton showAll = new JButton();
 		showAll.addActionListener(new ActionListener() {
-			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				String excelFilePath = "./doc/Staff.xls";
+				String excelFilePath = "Staff.xls";
 				StaffInfo reader = new StaffInfo();
 				List<Object> listBooks = null;
 				try {
@@ -133,7 +134,6 @@ public class HRDataPanel extends JPanel {
 
 		final JButton addButton = new JButton();
 		addButton.addActionListener(new ActionListener() {
-			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				int row = table.getRowCount();
 
@@ -144,12 +144,10 @@ public class HRDataPanel extends JPanel {
 					aaid.setBounds((size.width - 280) / 2, (size.height - 220) / 2, 280, 220);
 					aaid.setVisible(true);
 					vector = aaid.getVector();
-					System.out.println("#################vector========" + vector);
 					if (vector != null) {
 						Vector tableRowV = new Vector(vector);
 						// System.out.println("vector = "+tableRowV);
 						String input = (String) vector.elementAt(0);
-						System.out.println("/////////////////" + input);
 						String ckStr = checkInput(input);
 						if (ckStr != null) {
 							if (!ckStr.equals("exist")) {
@@ -158,7 +156,7 @@ public class HRDataPanel extends JPanel {
 								table.setRowSelectionInterval(row, row);
 
 								// save the staff information to Satff.xls
-								new DataSave().createXLS(tableModel, "doc/Staff.xls");
+								new DataSave().createXLS(tableModel, "Staff.xls");
 							}
 						}
 					}
@@ -202,8 +200,8 @@ public class HRDataPanel extends JPanel {
 					//delete the item from XLS
 					HSSFWorkbook wb;
 					try {
-						wb = HSSFReadWrite.readFile("doc/Staff.xls");
-						FileOutputStream stream = new FileOutputStream("doc/Staff.xls");
+						wb = HSSFReadWrite.readFile("Staff.xls");
+						FileOutputStream stream = new FileOutputStream("Staff.xls");
 						HSSFSheet sheet = wb.getSheetAt(0);
 						HSSFRow rowXLS = sheet.getRow(row);
 
@@ -239,7 +237,7 @@ public class HRDataPanel extends JPanel {
 			}
 			return null;
 		} else {
-			System.out.println("Checking the input!!!");
+//			System.out.println("Checking the input!!!");
 			for (int i = 0; i < table.getRowCount(); i++) {
 				Object valueAt = table.getValueAt(i, 1);
 				Object bossAt = table.getValueAt(i, 3);

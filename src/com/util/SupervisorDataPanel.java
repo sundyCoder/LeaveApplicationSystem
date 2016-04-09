@@ -1,3 +1,8 @@
+/*
+ * Author: sundy
+ * e-mail: sundycoder@gmail.com
+ * Date:   March 27,2016
+ */
 package com.util;
 
 import java.awt.BorderLayout;
@@ -18,7 +23,6 @@ import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
 
 import com.data.LeaveInfo;
-import com.test.RetrieveLeaveInfoTest;
 import com.view.MTable;
 
 public class SupervisorDataPanel extends JPanel {
@@ -57,9 +61,10 @@ public class SupervisorDataPanel extends JPanel {
 		
 
 		//get data
-		String excelFilePath = "./doc/Leave.xls";
+		String excelFilePath = "Leave.xls";
 		LeaveInfo reader = new LeaveInfo();
 		List<Object> listBooks = null;
+		
 		try {
 			listBooks = reader.readBooksFromExcelFile(excelFilePath, "Eric");
 			System.out.println("listBooks = " + listBooks);

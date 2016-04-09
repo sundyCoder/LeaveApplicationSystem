@@ -1,3 +1,8 @@
+/*
+ * Author: sundy
+ * e-mail: sundycoder@gmail.com
+ * Date:   March 27,2016
+ */
 package com.util;
 
 import java.awt.FlowLayout;
@@ -6,8 +11,6 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
@@ -47,19 +50,19 @@ public class LeaveApplicationForm extends JDialog{
 	 * 
 	 * @param args
 	 */
-	public static void main(String args[]) {
-		try {
-			LeaveApplicationForm dialog = new LeaveApplicationForm(true, "");
-			dialog.addWindowListener(new WindowAdapter() {
-				public void windowClosing(WindowEvent e) {
-					System.exit(0);
-				}
-			});
-			dialog.setVisible(true);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+//	public static void main(String args[]) {
+//		try {
+//			LeaveApplicationForm dialog = new LeaveApplicationForm(true, "");
+//			dialog.addWindowListener(new WindowAdapter() {
+//				public void windowClosing(WindowEvent e) {
+//					System.exit(0);
+//				}
+//			});
+//			dialog.setVisible(true);
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//	}
 
 	/**
 	 * Create the dialog
@@ -108,7 +111,6 @@ public class LeaveApplicationForm extends JDialog{
 		
 		JButton startOK = new JButton("OK");
 		startOK.addActionListener(new ActionListener() {
-			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				startDate = (Date) startDatePicker.getModel().getValue();
@@ -146,7 +148,6 @@ public class LeaveApplicationForm extends JDialog{
 		
 		JButton endOK = new JButton("OK");
 		endOK.addActionListener(new ActionListener() {
-			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				endDate = (Date) endDatePicker.getModel().getValue();

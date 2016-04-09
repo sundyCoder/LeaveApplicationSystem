@@ -1,3 +1,8 @@
+/*
+ * Author: sundy
+ * e-mail: sundycoder@gmail.com
+ * Date:   March 27,2016
+ */
 package com.date;
 
 import java.text.ParseException;
@@ -7,7 +12,7 @@ import java.util.Calendar;
 import javax.swing.JFormattedTextField.AbstractFormatter;
 
 public class DateLabelFormatter extends AbstractFormatter {
-
+	private static final long serialVersionUID = 1L;
 	private String datePattern = "yyyy-MM-dd";
 	private SimpleDateFormat dateFormatter = new SimpleDateFormat(datePattern);
 	

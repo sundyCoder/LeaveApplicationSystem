@@ -1,3 +1,8 @@
+/*
+ * Author: sundy
+ * e-mail: sundycoder@gmail.com
+ * Date:   March 27,2016
+ */
 package com.view;
 
 import javax.swing.*;
@@ -7,6 +12,7 @@ import java.awt.event.ActionListener;
 
 
 public class SupervisorLogin extends JFrame {
+	private static final long serialVersionUID = 1L;
 	String supName;
 	
 	public String getSupName() {
@@ -40,9 +46,8 @@ public class SupervisorLogin extends JFrame {
         centerPanel.add(passwordTextField);
         centerPanel.add(new JPanel());
         centerPanel.add(new JPanel());
-        JButton button = new JButton("Login");
+        final JButton button = new JButton("Login");
         button.addActionListener(new ActionListener() {
-            @Override
             public void actionPerformed(ActionEvent e) {
             	String userNameText = usernameTextField.getText();
             	setSupName(userNameText);  

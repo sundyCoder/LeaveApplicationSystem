@@ -1,3 +1,8 @@
+/*
+ * Author: sundy
+ * e-mail: sundycoder@gmail.com
+ * Date:   March 27,2016
+ */
 package com.util;
 
 import java.awt.FlowLayout;
@@ -6,8 +11,6 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Vector;
@@ -31,25 +34,6 @@ public class AddAccountItemDialog extends JDialog {
 	private Vector vector;
 	private ArrayList<String>  strArray;
 	private Iterator<String> iter;
-
-	/**
-	 * Launch the application
-	 * 
-	 * @param args
-	 */
-	public static void main(String args[]) {
-		try {
-			AddAccountItemDialog dialog = new AddAccountItemDialog(true, "");
-			dialog.addWindowListener(new WindowAdapter() {
-				public void windowClosing(WindowEvent e) {
-					System.exit(0);
-				}
-			});
-			dialog.setVisible(true);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
 
 	/**
 	 * Create the dialog
@@ -147,7 +131,7 @@ public class AddAccountItemDialog extends JDialog {
 
 		final JButton submitButton = new JButton();
 		strArray = new ArrayList<String>();
-		HRDataPanel dPanel = new HRDataPanel();
+		final HRDataPanel dPanel = new HRDataPanel();
 		submitButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//Staff Name
@@ -227,4 +211,24 @@ public class AddAccountItemDialog extends JDialog {
 	public Vector getVector() {
 		return vector;
 	}
+	
+
+	/**
+	 * Launch the application
+	 * 
+	 * @param args
+	 */
+//	public static void main(String args[]) {
+//		try {
+//			AddAccountItemDialog dialog = new AddAccountItemDialog(true, "");
+//			dialog.addWindowListener(new WindowAdapter() {
+//				public void windowClosing(WindowEvent e) {
+//					System.exit(0);
+//				}
+//			});
+//			dialog.setVisible(true);
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//	}
 }

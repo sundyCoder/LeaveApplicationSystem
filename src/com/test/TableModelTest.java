@@ -1,3 +1,8 @@
+/*
+ * Author: sundy
+ * e-mail: sundycoder@gmail.com
+ * Date:   March 27,2016
+ */
 package com.test;
 
 import java.util.Vector;
@@ -55,13 +60,11 @@ public class TableModelTest extends AbstractTableModel {
         }
     }
 
-	@Override
 	public int getRowCount() {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
-	@Override
 	public Object getValueAt(int rowIndex, int columnIndex) {
 		// TODO Auto-generated method stub
 		return null;

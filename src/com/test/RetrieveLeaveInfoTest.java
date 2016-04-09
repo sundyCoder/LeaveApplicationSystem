@@ -1,10 +1,14 @@
+/*
+ * Author: sundy
+ * e-mail: sundycoder@gmail.com
+ * Date:   March 27,2016
+ */
 package com.test;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Vector;
 
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
@@ -83,7 +87,7 @@ public class RetrieveLeaveInfoTest {
     
 //	//Testing demo
 //	public static void main(String[] args) throws IOException {
-//	    String excelFilePath = "./doc/Leave.xls";
+//	    String excelFilePath = "doc/Leave.xls";
 //	    RetrieveLeaveInfo reader = new RetrieveLeaveInfo();
 //	    List<Object> listBooks = reader.readBooksFromExcelFile(excelFilePath,"Eric");
 //	    System.out.println(listBooks);

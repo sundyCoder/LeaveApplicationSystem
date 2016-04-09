@@ -19,13 +19,11 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTable;
 import javax.swing.JTree;
 import javax.swing.SwingConstants;
 import javax.swing.border.TitledBorder;
 import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
-import javax.swing.table.DefaultTableModel;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeCellRenderer;
 import javax.swing.tree.DefaultTreeModel;
@@ -41,8 +39,6 @@ public class BaseFrame extends JFrame {
 	private JTree tree;
 	final JPanel rightPanel = new JPanel();
 	final JLabel backgroundLabel = new JLabel();
-	private DefaultTableModel tableModel;
-	private JTable table;
 	URL resource;
 	ImageIcon icon;
 	/**
@@ -150,8 +146,7 @@ public class BaseFrame extends JFrame {
 			TreePath path = new TreePath(node.getPath());// 获得结点对象的路径
 			tree.expandPath(path);// 展开该结点
 		}
-		tree.addTreeSelectionListener(new TreeSelectionListener() {// 捕获树的选取事件
-			@Override
+		tree.addTreeSelectionListener(new TreeSelectionListener() {// 捕获树的选取事件  Observer pattern
 			public void valueChanged(TreeSelectionEvent e) {
 				// TODO Auto-generated method stub
 				rightPanel.removeAll();
@@ -197,7 +192,10 @@ public class BaseFrame extends JFrame {
 						if (selectedNode.equals("About")) {
 							try {
 								java.awt.Desktop.getDesktop().browse(new java.net.URI("https://github.com/sundyCoder/LeaveApplicationSystem"));
-							} catch (IOException | URISyntaxException e1) {
+							} catch (IOException e1) {
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
+							} catch (URISyntaxException e1) {
 								// TODO Auto-generated catch block
 								e1.printStackTrace();
 							}
@@ -206,7 +204,10 @@ public class BaseFrame extends JFrame {
 						}else if(selectedNode.equals("Polyu")){
 							try {
 								java.awt.Desktop.getDesktop().browse(new java.net.URI("http://www.polyu.edu.hk/~hro/"));
-							} catch (IOException | URISyntaxException e1) {
+							} catch (IOException e1) {
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
+							} catch (URISyntaxException e1) {
 								// TODO Auto-generated catch block
 								e1.printStackTrace();
 							}

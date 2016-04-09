@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- WARNING: Eclipse auto-generated file.
+              Any modifications will be overwritten.
+              To include a user specific buildfile here, simply create one in the same
+              directory with the processing instruction <?eclipse.ant.import?>
+              as the first entry and export the buildfile again. --><project basedir="." default="build" name="LeaveApplicationSystem">
+    <property environment="env"/>
+    <property name="debuglevel" value="source,lines,vars"/>
+    <property name="target" value="1.8"/>
+    <property name="source" value="1.8"/>
+    
+         <!--1. Variable (sundy) -->
+	<property name="lib.dir" location="lib" />
+	<property name="src.dir" location="src" />
+	<property name="classes.dir" location="bin" />
+	<property name="output.dir" location="out" />
+	<property name="jarname" value="leaveApplicationSystem.jar" />
+	<property name="mainclass" location="com.view.BaseFrame" />
+	<property name="docs.dir" location="docs" />
+    <path id="LeaveApplicationSystem.classpath">
+        <pathelement location="bin"/>
+        <pathelement location="lib/commons-codec-1.9.jar"/>
+        <pathelement location="lib/jdatepicker-1.3.2.jar"/>
+        <pathelement location="lib/junit-4.12.jar"/>
+        <pathelement location="lib/log4j-1.2.17.jar"/>
+        <pathelement location="lib/xmlbeans-2.6.0.jar"/>
+        <pathelement location="lib/poi-3.14.jar"/>
+        <pathelement location="lib/commons-logging-1.2.jar"/>
+        <pathelement location="lib/poi-examples-3.14.jar"/>
+        <pathelement location="lib/poi-excelant-3.14.jar"/>
+        <pathelement location="lib/poi-ooxml-3.14.jar"/>
+        <pathelement location="lib/poi-ooxml-schemas-3.14.jar"/>
+        <pathelement location="lib/poi-scratchpad-3.14.jar"/>
+    </path>
+    <target name="init">
+        <mkdir dir="bin"/>
+        <copy includeemptydirs="false" todir="bin">
+            <fileset dir="src">
+                <exclude name="**/*.java"/>
+            </fileset>
+        </copy>
+    </target>
+    
+   <!--2. clean (sundy) -->
+	<target name="clean">
+		<delete dir="${classes.dir}" />
+		<delete dir="${output.dir}" />
+		<delete dir="${docs.dir}" />
+	</target>
+	
+    <target depends="clean" name="cleanall"/>
+    <target depends="build-subprojects,build-project" name="build"/>
+    <target name="build-subprojects"/>
+    <target depends="init" name="build-project">
+        <echo message="${ant.project.name}: ${ant.file}"/>
+        <javac debug="true" debuglevel="${debuglevel}" destdir="bin" includeantruntime="false" source="${source}" target="${target}">
+            <src path="src"/>
+            <classpath refid="LeaveApplicationSystem.classpath"/>
+        </javac>
+    </target>
+    <target description="Build all projects which reference this project. Useful to propagate changes." name="build-refprojects"/>
+    <target description="copy Eclipse compiler jars to ant lib directory" name="init-eclipse-compiler">
+        <copy todir="${ant.library.dir}">
+            <fileset dir="${ECLIPSE_HOME}/plugins" includes="org.eclipse.jdt.core_*.jar"/>
+        </copy>
+        <unzip dest="${ant.library.dir}">
+            <patternset includes="jdtCompilerAdapter.jar"/>
+            <fileset dir="${ECLIPSE_HOME}/plugins" includes="org.eclipse.jdt.core_*.jar"/>
+        </unzip>
+    </target>
+    <target description="compile project with Eclipse compiler" name="build-eclipse-compiler">
+        <property name="build.compiler" value="org.eclipse.jdt.core.JDTCompilerAdapter"/>
+        <antcall target="build"/>
+    </target>
+    <target name="AddAccountItemDialog">
+        <java classname="com.ui.AddAccountItemDialog" failonerror="true" fork="yes">
+            <classpath refid="LeaveApplicationSystem.classpath"/>
+        </java>
+    </target>
+    <target name="BaseDao">
+        <java classname="com.hibernate.BaseDao" failonerror="true" fork="yes">
+            <classpath refid="LeaveApplicationSystem.classpath"/>
+        </java>
+    </target>
+    <target name="BaseFrame (2)">
+        <java classname="com.view.BaseFrame" failonerror="true" fork="yes">
+            <classpath refid="LeaveApplicationSystem.classpath"/>
+        </java>
+    </target>
+    <target name="BaseFrame">
+        <java classname="com.ui.BaseFrame" failonerror="true" fork="yes">
+            <classpath refid="LeaveApplicationSystem.classpath"/>
+        </java>
+    </target>
+    <target name="Test">
+        <java classname="Test" failonerror="true" fork="yes">
+            <classpath refid="LeaveApplicationSystem.classpath"/>
+        </java>
+    </target>
+    
+    <!--3 Creates the deployable jar file (sundy)  -->
+	<target name="jar" depends="build-project">
+	    <copy todir="${output.dir}/lib">  
+            <fileset dir="${lib.dir}"/>  
+        </copy>  
+        
+	    <!--Create a property containing all .jar files,  
+        prefix lib/, and seperated with a space-->  
+        <pathconvert property="mf.classpath" pathsep=" ">  
+            <mapper>  
+                <chainedmapper>  
+                    <!-- jar包文件只留文件名，去掉目录信息 -->  
+                    <flattenmapper/>  
+                    <!-- add lib/ prefix -->  
+                    <globmapper from="*" to="lib/*"/>  
+                </chainedmapper>  
+            </mapper>  
+            <path refid="LeaveApplicationSystem.classpath"/>  
+         </pathconvert>  
+	    
+		<jar destfile="${output.dir}/${jarname}" basedir="${classes.dir}">
+			<manifest>
+				<attribute name="Main-Class" value="com.view.BaseFrame" />
+			</manifest>
+		</jar>
+	</target>
+	
+	<!--4. Create Javadoc (sundy) -->
+	<target name="docs" depends="build-project">
+		<javadoc packagenames="src" sourcepath="${src.dir}" destdir="${docs.dir}">
+			<fileset dir="${src.dir}">
+			    <exclude name="imgs/**"></exclude>
+				<include name="**" />
+			</fileset>	
+		</javadoc>
+	</target>
+
+	<!--5. run the jar file (sundy) -->
+	<target name="run" depends="jar">
+	    <java jar="${output.dir}/${jarname}" fork="true"/>
+	</target>
+</project>
