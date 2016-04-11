@@ -33,7 +33,7 @@ public class SupervisorDataPanel extends JPanel {
 	URL resource;
 	ImageIcon icon;
 	
-	public SupervisorDataPanel(/*String supName*/){
+	public SupervisorDataPanel(String supName){
 		super();
 		
 		setLayout(new BorderLayout());
@@ -45,11 +45,9 @@ public class SupervisorDataPanel extends JPanel {
 		final JSplitPane splitPane = new JSplitPane();
 		splitPane.setDividerLocation(130);
 		add(splitPane, BorderLayout.CENTER);
-		
 
 		final JScrollPane scrollPane = new JScrollPane();
 		splitPane.setRightComponent(scrollPane);
-		
 		
 		final JLabel leftLabel = new JLabel();
 		leftLabel.setHorizontalAlignment(SwingConstants.CENTER);
@@ -58,7 +56,6 @@ public class SupervisorDataPanel extends JPanel {
 		icon = new ImageIcon(resource);
 		leftLabel.setIcon(icon);
 		splitPane.setLeftComponent(leftLabel);
-		
 
 		//get data
 		String excelFilePath = "Leave.xls";
@@ -66,7 +63,7 @@ public class SupervisorDataPanel extends JPanel {
 		List<Object> listBooks = null;
 		
 		try {
-			listBooks = reader.readBooksFromExcelFile(excelFilePath, "Eric");
+			listBooks = reader.readBooksFromExcelFile(excelFilePath, supName);
 			System.out.println("listBooks = " + listBooks);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -87,14 +84,13 @@ public class SupervisorDataPanel extends JPanel {
 			vecStr.add(((LeaveInfo) info).getEndDate());vecStr.add(((LeaveInfo) info).getSupervisor());
 			vecStr.add(new Boolean (false));
 			vecLeave.add(vecStr);
+			
 //			System.out.println("vecLeave = "+vecLeave);
 			tableModel = new DefaultTableModel(vecLeave, columnNames);
 			
 			table = new MTable(tableModel);
-			table.getSelectionModel().setSelectionMode(
-					ListSelectionModel.SINGLE_SELECTION);
+			table.getSelectionModel().setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 			scrollPane.setViewportView(table); 
 		}
 	}
-	
 }

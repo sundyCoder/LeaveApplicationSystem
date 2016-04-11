@@ -24,6 +24,7 @@ public class LeaveInfo {
 	private String startDate;
 	private String endDate;
 	private String supervisor;
+//	private Boolean leaveInfo;
 	
 	Workbook workbook;
 
@@ -115,31 +116,31 @@ public class LeaveInfo {
 		while (iterator.hasNext()) {
 			Row nextRow = iterator.next();
 			Iterator<Cell> cellIterator = nextRow.cellIterator();
-			LeaveInfo aBook = new LeaveInfo();
+			LeaveInfo leaveData = new LeaveInfo();
 			while (cellIterator.hasNext()) {
 				Cell nextCell = cellIterator.next();
 				int columnIndex = nextCell.getColumnIndex();
 				switch (columnIndex) {
 				case 0:
-	                aBook.setName((String) getCellValue(nextCell));
+	                leaveData.setName((String) getCellValue(nextCell));
 	                break;
 	            case 1:
-	                aBook.setStartDate((String) getCellValue(nextCell));
+	                leaveData.setStartDate((String) getCellValue(nextCell));
 	                break;
 	            case 2:
-	                aBook.setEndDate((String) getCellValue(nextCell));
+	                leaveData.setEndDate((String) getCellValue(nextCell));
 	                break;
 	            case 3:
-	                aBook.setSupervisor((String) getCellValue(nextCell));
+	                leaveData.setSupervisor((String) getCellValue(nextCell));
 	                break;
 				}
 			}
 				if (!supName.equals("Any")) {
-					if (aBook.getSupervisor().equals(supName)) {
-						listLeave.add(aBook);
+					if (leaveData.getSupervisor().equals(supName)) {
+						listLeave.add(leaveData);
 					}
 				} else {
-					listLeave.add(aBook);
+					listLeave.add(leaveData);
 				}
 			}
 	    workbook.close();

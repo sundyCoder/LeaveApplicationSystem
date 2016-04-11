@@ -17,7 +17,7 @@ public class MTable extends JTable {
 	}
 
 	@Override
-	// 使表格不可编辑
+	// 使表格4列之前的不可编辑
 	public boolean isCellEditable(int row, int column) {
 		  if (column < 4) {
 	            return false;
@@ -37,5 +37,4 @@ public class MTable extends JTable {
 		tableHeader.setReorderingAllowed(false);
 		return tableHeader;
 	}
-
 }

@@ -41,21 +41,6 @@ public class MainFrame extends JFrame {
 	final JLabel backgroundLabel = new JLabel();
 	URL resource;
 	ImageIcon icon;
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					MainFrame frame = new MainFrame();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
 	/**
 	 * Create the frame.
@@ -176,7 +161,7 @@ public class MainFrame extends JFrame {
 							//Login in to address leave application information
 //							SupervisorLogin supervisor = new SupervisorLogin();
 //							String supName = supervisor.getSupName();
-							rightPanel.add(new SupervisorDataPanel(/*supName*/),BorderLayout.CENTER);
+							rightPanel.add(new SupervisorDataPanel("Any"),BorderLayout.CENTER);
 							rightPanel.setVisible(true);
 							
 						} else if (selectedNode.equals("Director")) {
@@ -185,7 +170,7 @@ public class MainFrame extends JFrame {
 							//Login in to address leave application information
 //							SupervisorLogin supervisor = new SupervisorLogin();
 //							String supName = supervisor.getSupName();
-							rightPanel.add(new SupervisorDataPanel(/*supName*/),BorderLayout.CENTER);
+							rightPanel.add(new SupervisorDataPanel("Eric"),BorderLayout.CENTER);
 							rightPanel.setVisible(true);
 						}
 					}else if(parentNode.equals("Help?")){
@@ -236,4 +221,20 @@ public class MainFrame extends JFrame {
 		backgroundLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		rightPanel.add(backgroundLabel, BorderLayout.CENTER);
 	}
+	
+	/**
+	 * Launch the application.
+	 */
+//	public static void main(String[] args) {
+//		EventQueue.invokeLater(new Runnable() {
+//			public void run() {
+//				try {
+//					MainFrame frame = new MainFrame();
+//					frame.setVisible(true);
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		});
+//	}
 }
