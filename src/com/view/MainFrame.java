@@ -30,6 +30,7 @@ import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreePath;
 
 import com.util.HRDataPanel;
+import com.util.LeaveProcessPanel;
 import com.util.StaffDataPanel;
 import com.util.SupervisorDataPanel;
 
@@ -161,7 +162,8 @@ public class MainFrame extends JFrame {
 							//Login in to address leave application information
 //							SupervisorLogin supervisor = new SupervisorLogin();
 //							String supName = supervisor.getSupName();
-							rightPanel.add(new SupervisorDataPanel("Any"),BorderLayout.CENTER);
+							rightPanel.add(new LeaveProcessPanel(),BorderLayout.CENTER);
+//							rightPanel.add(new SupervisorDataPanel("Any"),BorderLayout.CENTER);
 							rightPanel.setVisible(true);
 							
 						} else if (selectedNode.equals("Director")) {

@@ -176,8 +176,8 @@ public class LeaveApplicationForm extends JDialog{
 		bossComboBox = new JComboBox();
 		bossComboBox.addItem("Please Choose");
 		bossComboBox.addItem("James");
-		bossComboBox.addItem("Eric");
 		bossComboBox.addItem("Petter");
+		bossComboBox.addItem("Eric");
 		final GridBagConstraints gridBagConstraints_7 = new GridBagConstraints();
 		gridBagConstraints_7.insets = new Insets(10, 0, 0, 0);
 		gridBagConstraints_7.gridy = 3;

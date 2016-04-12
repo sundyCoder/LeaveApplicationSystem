@@ -9,32 +9,41 @@ A leave application system for a Human Resource Department.
 
 	Download the project.jar into your disk, and then double click it to run.
 	About how to manipulate it, you can look at the next part.
+	Or you can see it in my Youtube Tutorial:
+	    https://www.youtube.com/watch?v=TakfxiknC3c&feature=youtu.be
 	
 2.How to run the program?
 
    (1). Right click the project.
-        Run As -> Java Application -> MainFrame      
+        Run As -> Java Application -> Login,
+           Username:   staff
+           Password: 123456     
         
    (2). Then you can try the following function.
       After you run the program, you will see a main GUI in front of you.
-      You should double click the left tree list item to see want you want.
+      You should double click the left tree list item to see want you want to do.
          a.HRStaff: 
             Double click HRStaff item
               ->Show All:  you can see the information of all staff.
               ->Add Staff: you can add the staff, including name, age, Title and the current staff's supervisor.
                     (The current system has three default supervisor, James, Eric and Petter, and Eric is director.)
               ->Delete Staff: HR can delete a  staff.
+              
          b.Staff:
             Double click Staff item
                ->Leave Application:  apply for a leave from Date X to Date Y, and input who is your supervisor.
                ->Modify info: you also can Modify your leave information
+               ->Show Progress: staff can enquiry his/her leave applicaiton progress at here.
+               
          c.Supervisor:
             Double click Supervisor item
-               ->You can edit the Endorse, Marked it if the supervisor endoreed. Ignored it if the supervisor decline.
-         d.Director:
+               ->Deal Leave: Supervisor and Director can edit the Endorse, Marked it if the supervisor endoreed. Ignored it if the supervisor decline.
+               Only if all the direct or indirect supervisor endorsed this leave applicaiton, the staff can get a endorse of his/her leave.
+               
+         d.Director: (Here, Eric is a default director)
             Double click Director item:
                ->You can edit the Endorse, Marked it if director endorsed. Ignored it if the director declined
-               (The director in this sytem is Eric, so you can only see  Eric's leave notice information )
+               (The director in this sytem is Eric, so you can only see  Eric's leave notice information here )
                      
   
 2.How to read the source code?
@@ -51,38 +60,54 @@ A leave application system for a Human Resource Department.
 	    d. Select Project location, where a project was stored on your disk.
 	    e. Click Finish Button.
 	    f. Now, you can see the project in eclipse.
-	    g. Souce code architecture:							
-							©¤src
-							  ©À©¤com
-							  ©¦  ©À©¤data                                 //Data processing
-							  ©¦  ©¦      DataSave.java
-							  ©¦  ©¦      HSSFReadWrite.java
-							  ©¦  ©¦      LeaveInfo.java
-							  ©¦  ©¦      StaffInfo.java
-							  ©¦  ©¦
-							  ©¦  ©À©¤date                               //Date module
-							  ©¦  ©¦      DateLabelFormatter.java
-							  ©¦  ©¦      JDatePickerCalendar.java
-							  ©¦  ©¦
-							  ©¦  ©À©¤test                               //Function unit test
-							  ©¦  ©¦      RetrieveLeaveInfoTest.java
-							  ©¦  ©¦      SupervisorTableTest.java
-							  ©¦  ©¦      TableModelTest.java
-							  ©¦  ©¦
-							  ©¦  ©À©¤util                               //Test
-							  ©¦  ©¦      AddAccountItemDialog.java
-							  ©¦  ©¦      HRDataPanel.java
-							  ©¦  ©¦      LeaveApplicationForm.java
-							  ©¦  ©¦      StaffDataPanel.java
-							  ©¦  ©¦      SupervisorDataPanel.java
-							  ©¦  ©¦
-							  ©¦  ©¸©¤view
-							  ©¦          MainFrame.java                 //Main entry point, you can read from here.
-							  ©¦          MTable.java
-							  ©¦          SupervisorLogin.java
+	    g. Souce code architecture:		
+	    	   
+						    
+					©À©¤src
+					©¦  ©À©¤com 
+					©¦  ©¦  ©À©¤data                                        //Data processing
+					©¦  ©¦  ©¦      CacheFile.java 
+					©¦  ©¦  ©¦      DataSave.java
+					©¦  ©¦  ©¦      HSSFReadWrite.java
+					©¦  ©¦  ©¦      LeaveInfo.java
+					©¦  ©¦  ©¦      StaffInfo.java
+					©¦  ©¦  ©¦      StaffRelation.java
+					©¦  ©¦  ©¦
+					©¦  ©¦  ©À©¤date                                        //Date module
+					©¦  ©¦  ©¦      DateLabelFormatter.java
+					©¦  ©¦  ©¦      JDatePickerCalendar.java
+					©¦  ©¦  ©¦
+					©¦  ©¦  ©À©¤test                                        //Function unit test
+					©¦  ©¦  ©¦      ProcessTableTest.java
+					©¦  ©¦  ©¦      RetrieveLeaveInfoTest.java
+					©¦  ©¦  ©¦      SupervisorTableTest.java
+					©¦  ©¦  ©¦      TableModelTest.java
+					©¦  ©¦  ©¦
+					©¦  ©¦  ©À©¤util                                       //function module
+					©¦  ©¦  ©¦      AddAccountItemDialog.java
+					©¦  ©¦  ©¦      HRDataPanel.java
+					©¦  ©¦  ©¦      LeaveApplicationForm.java
+					©¦  ©¦  ©¦      LeaveProcessPanel.java
+					©¦  ©¦  ©¦      StaffDataPanel.java
+					©¦  ©¦  ©¦      SupervisorDataPanel.java
+					©¦  ©¦  ©¦
+					©¦  ©¦  ©¸©¤view
+					©¦  ©¦          Login.java                          //Login entry point
+					©¦  ©¦          MainFrame.java
+					©¦  ©¦          MTable.java
+					©¦  ©¦          TableModel.java
+					©¦  ©¦
+					©¦  ©¸©¤imgs                                         //GUI images
+					©¦          back.JPG
+					©¦          front.JPG
+					©¦          leftpanel0.JPG
+					©¦          leftpanel1.JPG
+					©¦          leftpanel2.JPG
+					©¦          logo.JPG
+						
 							  
 	 h. From the above, you can have a rough knowledge of my project.
-	    You can read from MainFrame.java file, which starting from main() function.
+	    You can read from Login.java file, which starting from main() function.
 
 
 3. What kind of design patterns are used in this project?

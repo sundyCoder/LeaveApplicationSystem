@@ -126,34 +126,34 @@ public class StaffInfo {
 		while (iterator.hasNext()) {
 			Row nextRow = iterator.next();
 			Iterator<Cell> cellIterator = nextRow.cellIterator();
-			StaffInfo aBook = new StaffInfo();
+			StaffInfo stInfo = new StaffInfo();
 			while (cellIterator.hasNext()) {
 				Cell nextCell = cellIterator.next();
 				int columnIndex = nextCell.getColumnIndex();
 				switch (columnIndex) {
 				case 0:
-					aBook.setID((String) getCellValue(nextCell));
+					stInfo.setID((String) getCellValue(nextCell));
 					break;
 				case 1:
-					aBook.setName((String) getCellValue(nextCell));
+					stInfo.setName((String) getCellValue(nextCell));
 					break;
 				case 2:
-					aBook.setAge((String) getCellValue(nextCell));
+					stInfo.setAge((String) getCellValue(nextCell));
 					break;
 				case 3:
-					aBook.setTitle((String) getCellValue(nextCell));
+					stInfo.setTitle((String) getCellValue(nextCell));
 					break;
 				case 4:
-					aBook.setSupervisor((String) getCellValue(nextCell));
+					stInfo.setSupervisor((String) getCellValue(nextCell));
 					break;
 				}
 			}
 			if (!supName.equals("Any")) {
-				if (aBook.getSupervisor().equals(supName)) {
-					staffVector.add(aBook);
+				if (stInfo.getSupervisor().equals(supName)) {
+					staffVector.add(stInfo);
 				}
 			} else {
-				staffVector.add(aBook);
+				staffVector.add(stInfo);
 			}
 		}
 		workbook.close();

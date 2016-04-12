@@ -22,6 +22,7 @@ import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
 
+import com.data.DataSave;
 import com.data.LeaveInfo;
 import com.view.MTable;
 
@@ -87,6 +88,7 @@ public class SupervisorDataPanel extends JPanel {
 			
 //			System.out.println("vecLeave = "+vecLeave);
 			tableModel = new DefaultTableModel(vecLeave, columnNames);
+//			new DataSave().createXLS(tableModel, "Process.xls");
 			
 			table = new MTable(tableModel);
 			table.getSelectionModel().setSelectionMode(ListSelectionModel.SINGLE_SELECTION);

@@ -12,6 +12,7 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.net.URL;
 import java.util.Vector;
 
@@ -27,6 +28,7 @@ import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
 import com.data.DataSave;
+import com.data.StaffRelation;
 import com.view.MTable;
 
 public class StaffDataPanel extends JPanel {
@@ -143,5 +145,57 @@ public class StaffDataPanel extends JPanel {
 		});
 		delButton.setText("Modify Info");
 		panel.add(delButton);
+		
+		final JButton showLeaveBt = new JButton();
+		showLeaveBt.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				Vector<String> tableColumnV = new Vector<String>();
+				Vector<Vector> tableValueV = new Vector<Vector>();;
+				
+				tableColumnV.add("Name");
+				tableColumnV.add("Leave Endorsed?");
+				
+//				tableModel = new DefaultTableModel(tableValueV, tableColumnV);
+				StaffRelation staff = new StaffRelation();
+				
+				try {
+					staff.readRelFromStaffInfo();
+					staff.readRelFromLeaveInfo();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+				Vector<String> leaveList = staff.getAllPeople();
+//				System.out.println("leaveList= "+leaveList);
+				for (int i = 0; i < leaveList.size(); i++) {
+					Vector<Object> vecData = new Vector<Object>();
+//					System.out.println(" ##"+leaveList.get(i));
+					String strName = leaveList.get(i);
+					boolean pr = false;
+					try {
+						pr = (new StaffRelation()).getLeaveProgress(strName);
+						System.out.println(pr);
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					vecData.add(strName);
+					vecData.add(new Boolean(pr));
+					tableValueV.add(vecData);
+					
+//					System.out.println("vecData: "+vecData);
+//					System.out.println("tableValueV: "+tableValueV);
+				}
+				tableModel = new DefaultTableModel(tableValueV, tableColumnV);
+
+				table = new MTable(tableModel);
+				table.getSelectionModel().setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+				scrollPane.setViewportView(table);
+				
+			}
+		});
+		showLeaveBt.setText("Show Progress");
+		panel.add(showLeaveBt);
 	}
 }

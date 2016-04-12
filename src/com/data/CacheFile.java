@@ -19,6 +19,7 @@ public class CacheFile {
 		// TODO Auto-generated method stub
 		list.add("Leave.xls");
 		list.add("Staff.xls");
+		list.add("Progress.xls");
 	}
 	
 	public void clearCache(){

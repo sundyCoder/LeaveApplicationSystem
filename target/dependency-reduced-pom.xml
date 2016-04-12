@@ -47,7 +47,7 @@
             <configuration>
               <transformers>
                 <transformer>
-                  <mainClass>com.view.BaseFrame</mainClass>
+                  <mainClass>com.view.Login</mainClass>
                 </transformer>
               </transformers>
             </configuration>
