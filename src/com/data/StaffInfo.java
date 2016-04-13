@@ -28,6 +28,7 @@ public class StaffInfo {
 	private String title;
 	private String supervisor;
 	Workbook workbook;
+	
 
 	public StaffInfo() {
 	}

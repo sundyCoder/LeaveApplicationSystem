@@ -15,6 +15,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
 
@@ -87,6 +88,7 @@ public class HRDataPanel extends JPanel {
 		table = new MTable(tableModel);
 		table.getSelectionModel().setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		scrollPane.setViewportView(table);
+		ArrayList<String> stList = new ArrayList<String>();
 
 		final JButton showAll = new JButton();
 		showAll.addActionListener(new ActionListener() {
@@ -135,11 +137,26 @@ public class HRDataPanel extends JPanel {
 		final JButton addButton = new JButton();
 		addButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+//				//############################//
+//				ArrayList<String> stInfo = null;
+//				StaffInfo reader = new StaffInfo();
+//				List<Object> listBooks = null;
+//				try {
+//					listBooks = reader.readBooksFromExcelFile("Leave.xls", "Any");
+//					stInfo = new ArrayList<String>();
+//					for (Object info : listBooks) {
+//						stInfo.add(((StaffInfo) info).getName());
+//					}
+//				} catch (IOException e) {
+//					// TODO Auto-generated catch block
+//					e.printStackTrace();
+//				}
+//				//############################//
 				int row = table.getRowCount();
 
 				if (table.getColumnCount() == 5) {
 					AddAccountItemDialog aaid;
-					aaid = new AddAccountItemDialog(true, "");
+					aaid = new AddAccountItemDialog();
 					Dimension size = Toolkit.getDefaultToolkit().getScreenSize();
 					aaid.setBounds((size.width - 280) / 2, (size.height - 220) / 2, 280, 220);
 					aaid.setVisible(true);
@@ -147,8 +164,12 @@ public class HRDataPanel extends JPanel {
 					if (vector != null) {
 						Vector tableRowV = new Vector(vector);
 						// System.out.println("vector = "+tableRowV);
-						String input = (String) vector.elementAt(0);
+						String input = (String) vector.elementAt(0);   //name cannot be repeated
 						String ckStr = checkInput(input);
+						
+						input = (String) vector.elementAt(2);  //check if there are more than one director
+						ckStr = checkInput(input);
+						
 						if (ckStr != null) {
 							if (!ckStr.equals("exist")) {
 								tableRowV.insertElementAt(row + 1, 0);
@@ -229,6 +250,7 @@ public class HRDataPanel extends JPanel {
 	}
 
 	public String checkInput(String item) {
+		System.out.println(" Before Judge Item:"+item);
 		if (item == null) {
 			System.out.println("null,Checking the input!!!");
 			if (item.length() == 0) {
@@ -237,16 +259,26 @@ public class HRDataPanel extends JPanel {
 			}
 			return null;
 		} else {
-//			System.out.println("Checking the input!!!");
+			System.out.println("Checking the input!!!");
 			for (int i = 0; i < table.getRowCount(); i++) {
 				Object valueAt = table.getValueAt(i, 1);
 				Object bossAt = table.getValueAt(i, 3);
-				System.out.println("valueAt = " + valueAt);
-				if (item.equals(valueAt.toString()) || bossAt.toString().equals("Director")) {
+				
+				if (item.equals(valueAt.toString()) ) { //bossAt.toString().equals("Director")
 					table.setRowSelectionInterval(i, i);
-					JOptionPane.showMessageDialog(null, "The " + "["+item + "]"+ " or 'Director' already exist£¡", "Attention",
+					JOptionPane.showMessageDialog(null, "The " + "["+item + "]"+ "already exist£¡", "Attention",
 							JOptionPane.INFORMATION_MESSAGE);
 					return "exist";
+				}
+				System.out.println(" Before Judge Item2:"+item);
+				if (item.equals("Director")) {
+					System.out.println("xxxx="+bossAt);
+					if (item.equals(bossAt.toString())) { // bossAt.toString().equals("Director")
+						table.setRowSelectionInterval(i, i);
+						JOptionPane.showMessageDialog(null, "The " + "[" + item + "]" + "already exist£¡", "Attention",
+								JOptionPane.INFORMATION_MESSAGE);
+						return "exist";
+					}
 				}
 			}
 		}

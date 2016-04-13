@@ -85,7 +85,6 @@ public class LeaveProcessPanel extends JPanel {
 				}
 				
 				Vector<String> leaveList = staff.getAllPeople();
-//				System.out.println("leaveList="+leaveList);
 				
 				Vector<Vector> vvList = new Vector<Vector>();
 				
@@ -102,7 +101,8 @@ public class LeaveProcessPanel extends JPanel {
 					}
 				}
 				
-				Object[][] data = {null,null,null,null,null,null}; //³õÊ¼»¯‚€”µ
+				Object[][] data = new Object[vvList.size()][]; //store deal info
+				
 				int k = 0;
 				for (int i = 0; i < vvList.size(); i++) {
 					int j = 0;

@@ -34,14 +34,15 @@ public class AddAccountItemDialog extends JDialog {
 	private Vector vector;
 	private ArrayList<String>  strArray;
 	private Iterator<String> iter;
+	private JTextField superiTextField;
 
 	/**
 	 * Create the dialog
 	 */
-	public AddAccountItemDialog(final boolean isTimecard, final String item) {
+	public AddAccountItemDialog() {
 		super();
 		getContentPane().setLayout(new GridBagLayout());
-		setTitle("Add " + item);
+		setTitle("Add ");
 		setModal(true);
 		setResizable(false);
 		setBounds(100, 100, 300, 230);
@@ -105,18 +106,25 @@ public class AddAccountItemDialog extends JDialog {
 		gridBagConstraints_2.gridx = 0;
 		getContentPane().add(unitLabel, gridBagConstraints_2);
 
-		bossComboBox = new JComboBox();
-		bossComboBox.addItem("Please Choose");
-		bossComboBox.addItem("James");
-		bossComboBox.addItem("Petter");
-		bossComboBox.addItem("Eric");
-		bossComboBox.addItem("null");
+//		bossComboBox = new JComboBox();
+//		bossComboBox.addItem("Please Choose");
+//		bossComboBox.addItem("James");
+//		bossComboBox.addItem("Petter");
+//		bossComboBox.addItem("Eric");
+//		bossComboBox.addItem("null");
+//		final GridBagConstraints gridBagConstraints_7 = new GridBagConstraints();
+//		gridBagConstraints_7.insets = new Insets(10, 0, 0, 0);
+//		gridBagConstraints_7.gridy = 3;
+//		gridBagConstraints_7.gridx = 1;
+//		getContentPane().add(bossComboBox, gridBagConstraints_7);
+		
+		superiTextField = new JTextField();
+		superiTextField.setColumns(11);
 		final GridBagConstraints gridBagConstraints_7 = new GridBagConstraints();
 		gridBagConstraints_7.insets = new Insets(10, 0, 0, 0);
 		gridBagConstraints_7.gridy = 3;
 		gridBagConstraints_7.gridx = 1;
-		getContentPane().add(bossComboBox, gridBagConstraints_7);
-		
+		getContentPane().add(superiTextField, gridBagConstraints_7);
 		
 		final JPanel panel = new JPanel();
 		final FlowLayout flowLayout = new FlowLayout();
@@ -143,7 +151,6 @@ public class AddAccountItemDialog extends JDialog {
 							JOptionPane.INFORMATION_MESSAGE);
 					return;
 				}
-				dPanel.checkInput(name);				
 				
 				//Staff Age
 				String age = ageTextField.getText();                
@@ -156,37 +163,31 @@ public class AddAccountItemDialog extends JDialog {
 				
 				//Staff Title
 				String type = typeComboBox.getSelectedItem().toString();
-//				type = type.trim().replace(" ", "");
-				if (type.equals("Please Choose")) {
-					JOptionPane.showMessageDialog(null, "Please choose a right title£¡", "Attention",
+				System.out.println("Test Director:"+type);
+				if (type.length() == 0 || type.length() > 20) {
+					JOptionPane.showMessageDialog(null,
+							"Name cannot be null£¡", "Attention",
 							JOptionPane.INFORMATION_MESSAGE);
 					return;
-				}
-				System.out.println("Test Director:"+type);
-				if (type.equals("Director")) {
-//					if(strArray.contains(type)){
-//						JOptionPane.showMessageDialog(null, "Director already exist!", "Attention",
-//								JOptionPane.INFORMATION_MESSAGE);
-//					}
-					iter = strArray.iterator();
-					while (iter.hasNext()) {
-						System.out.println("coming into this judgement!!!");
-						String str = (String) iter.next();
-						if (type.equals(str)) {
-							JOptionPane.showMessageDialog(null, "Director already exist", "Attention",
-									JOptionPane.INFORMATION_MESSAGE);
-						}
-					}
 				}
 
-				//Staff Title
-				String superior = bossComboBox.getSelectedItem().toString();
-//				type = type.trim().replace(" ", "");
-				if (type.equals("Please Choose")) {
-					JOptionPane.showMessageDialog(null, "Please allocate a Supevisor£¡", "Attention",
+				//suprvisor
+				String superior = superiTextField.getText();
+				if (superior.length() == 0 || superior.length() > 20) {
+					JOptionPane.showMessageDialog(null,
+							"Superviosr cannot be null£¡", "Attention",
 							JOptionPane.INFORMATION_MESSAGE);
 					return;
 				}
+				
+				if(type.equals("Director")){
+					if(!superior.equals("null")){
+						JOptionPane.showMessageDialog(null,
+								"Director cannot have a supervisor,Input null£¡", "Attention",
+								JOptionPane.INFORMATION_MESSAGE);
+					}
+				}
+				
 				vector = new Vector();
 				vector.add(name);
 				vector.add(age);

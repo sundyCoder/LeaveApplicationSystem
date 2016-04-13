@@ -44,6 +44,7 @@ public class LeaveApplicationForm extends JDialog{
 	private JDatePickerImpl endDatePicker;
 	private Date startDate;
 	private Date endDate;
+	private JTextField superiTextField;
 	
 	/**
 	 * Launch the application
@@ -173,16 +174,24 @@ public class LeaveApplicationForm extends JDialog{
 		gridBagConstraints_3.gridx = 0;
 		getContentPane().add(unitLabel, gridBagConstraints_3);
 
-		bossComboBox = new JComboBox();
-		bossComboBox.addItem("Please Choose");
-		bossComboBox.addItem("James");
-		bossComboBox.addItem("Petter");
-		bossComboBox.addItem("Eric");
+//		bossComboBox = new JComboBox();
+//		bossComboBox.addItem("Please Choose");
+//		bossComboBox.addItem("James");
+//		bossComboBox.addItem("Petter");
+//		bossComboBox.addItem("Eric");
+//		final GridBagConstraints gridBagConstraints_7 = new GridBagConstraints();
+//		gridBagConstraints_7.insets = new Insets(10, 0, 0, 0);
+//		gridBagConstraints_7.gridy = 3;
+//		gridBagConstraints_7.gridx = 1;
+//		getContentPane().add(bossComboBox, gridBagConstraints_7);
+		
+		superiTextField = new JTextField();
+		superiTextField.setColumns(11);
 		final GridBagConstraints gridBagConstraints_7 = new GridBagConstraints();
 		gridBagConstraints_7.insets = new Insets(10, 0, 0, 0);
 		gridBagConstraints_7.gridy = 3;
 		gridBagConstraints_7.gridx = 1;
-		getContentPane().add(bossComboBox, gridBagConstraints_7);
+		getContentPane().add(superiTextField, gridBagConstraints_7);
 		
 		
 		final JPanel panel = new JPanel();
@@ -212,8 +221,8 @@ public class LeaveApplicationForm extends JDialog{
 				}
 
 				//Staff Title
-				String superior = bossComboBox.getSelectedItem().toString();
-				if (superior.equals("Please Choose")) {
+				String superior = superiTextField.getText();
+				if (superior.equals("null")) {
 					JOptionPane.showMessageDialog(null, "Please allocate a Supevisor£¡", "Attention",
 							JOptionPane.INFORMATION_MESSAGE);
 					return;

@@ -1,4 +1,5 @@
 com\data\HSSFReadWrite.class
+com\test\ProcessTableTest.class
 com\util\StaffDataPanel$1.class
 com\date\DateLabelFormatter.class
 com\data\CacheFile.class
