@@ -21,28 +21,11 @@ public class TableModel extends AbstractTableModel {
 	        "Endorse?"};
 	
 	public  TableModel(Object[][] data){
-//		for (int i = 0; i < data.length; i++) {
-//			System.out.print("    row " + i + ":");
-//			for (int j1 = 0; j1 < 2; j1++) {
-//				System.out.print("  " + data[i][j1]);
-//			}
-//			System.out.println();
-//		}
-//		System.out.println("--------------------------");
 		this.data = data;
 		tableModel = new DefaultTableModel(data, columnNames);
 		new DataSave().createXLS(tableModel, "Progress.xls");
 	}
 	
-//    private Object[][] data = {
-////    		{"sundy", "2016-4-1","2016-5-1", "James", new Boolean(false)},
-////    {"John", "Doe",  "Rowing", new Integer(3), new Boolean(true)},
-////    {"Sue", "Black", "Knitting", new Integer(2), new Boolean(false)},
-////    {"Jane", "White","Speed reading", new Integer(20), new Boolean(false)},
-//    		{"sundy", "2016-4-1","2016-5-1", "James", new Boolean(false)}
-//    };
-    
-    
     public int getColumnCount() {
         return columnNames.length;
     }

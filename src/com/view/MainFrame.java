@@ -159,19 +159,12 @@ public class MainFrame extends JFrame {
 						} else if (selectedNode.equals("Supervisor")) {
 							System.out.println("Human Resource->Supervisor");
 							rightPanel.setVisible(false);
-							//Login in to address leave application information
-//							SupervisorLogin supervisor = new SupervisorLogin();
-//							String supName = supervisor.getSupName();
 							rightPanel.add(new LeaveProcessPanel(),BorderLayout.CENTER);
-//							rightPanel.add(new SupervisorDataPanel("Any"),BorderLayout.CENTER);
 							rightPanel.setVisible(true);
 							
 						} else if (selectedNode.equals("Director")) {
 							System.out.println("Human Resource->Director");
 							rightPanel.setVisible(false);
-							//Login in to address leave application information
-//							SupervisorLogin supervisor = new SupervisorLogin();
-//							String supName = supervisor.getSupName();
 							rightPanel.add(new SupervisorDataPanel("Eric"),BorderLayout.CENTER);
 							rightPanel.setVisible(true);
 						}

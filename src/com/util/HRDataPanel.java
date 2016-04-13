@@ -137,21 +137,6 @@ public class HRDataPanel extends JPanel {
 		final JButton addButton = new JButton();
 		addButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-//				//############################//
-//				ArrayList<String> stInfo = null;
-//				StaffInfo reader = new StaffInfo();
-//				List<Object> listBooks = null;
-//				try {
-//					listBooks = reader.readBooksFromExcelFile("Leave.xls", "Any");
-//					stInfo = new ArrayList<String>();
-//					for (Object info : listBooks) {
-//						stInfo.add(((StaffInfo) info).getName());
-//					}
-//				} catch (IOException e) {
-//					// TODO Auto-generated catch block
-//					e.printStackTrace();
-//				}
-//				//############################//
 				int row = table.getRowCount();
 
 				if (table.getColumnCount() == 5) {

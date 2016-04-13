@@ -106,18 +106,6 @@ public class AddAccountItemDialog extends JDialog {
 		gridBagConstraints_2.gridx = 0;
 		getContentPane().add(unitLabel, gridBagConstraints_2);
 
-//		bossComboBox = new JComboBox();
-//		bossComboBox.addItem("Please Choose");
-//		bossComboBox.addItem("James");
-//		bossComboBox.addItem("Petter");
-//		bossComboBox.addItem("Eric");
-//		bossComboBox.addItem("null");
-//		final GridBagConstraints gridBagConstraints_7 = new GridBagConstraints();
-//		gridBagConstraints_7.insets = new Insets(10, 0, 0, 0);
-//		gridBagConstraints_7.gridy = 3;
-//		gridBagConstraints_7.gridx = 1;
-//		getContentPane().add(bossComboBox, gridBagConstraints_7);
-		
 		superiTextField = new JTextField();
 		superiTextField.setColumns(11);
 		final GridBagConstraints gridBagConstraints_7 = new GridBagConstraints();
@@ -163,7 +151,6 @@ public class AddAccountItemDialog extends JDialog {
 				
 				//Staff Title
 				String type = typeComboBox.getSelectedItem().toString();
-				System.out.println("Test Director:"+type);
 				if (type.length() == 0 || type.length() > 20) {
 					JOptionPane.showMessageDialog(null,
 							"Name cannot be null£¡", "Attention",
@@ -207,7 +194,6 @@ public class AddAccountItemDialog extends JDialog {
 		});
 		exitButton.setText("Exit");
 		panel.add(exitButton);
-		//
 	}
 
 	public Vector getVector() {

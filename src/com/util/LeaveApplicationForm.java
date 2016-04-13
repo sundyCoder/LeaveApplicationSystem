@@ -47,25 +47,6 @@ public class LeaveApplicationForm extends JDialog{
 	private JTextField superiTextField;
 	
 	/**
-	 * Launch the application
-	 * 
-	 * @param args
-	 */
-//	public static void main(String args[]) {
-//		try {
-//			LeaveApplicationForm dialog = new LeaveApplicationForm(true, "");
-//			dialog.addWindowListener(new WindowAdapter() {
-//				public void windowClosing(WindowEvent e) {
-//					System.exit(0);
-//				}
-//			});
-//			dialog.setVisible(true);
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//	}
-
-	/**
 	 * Create the dialog
 	 */
 	public LeaveApplicationForm(final boolean isTimecard, final String item) {
@@ -174,17 +155,6 @@ public class LeaveApplicationForm extends JDialog{
 		gridBagConstraints_3.gridx = 0;
 		getContentPane().add(unitLabel, gridBagConstraints_3);
 
-//		bossComboBox = new JComboBox();
-//		bossComboBox.addItem("Please Choose");
-//		bossComboBox.addItem("James");
-//		bossComboBox.addItem("Petter");
-//		bossComboBox.addItem("Eric");
-//		final GridBagConstraints gridBagConstraints_7 = new GridBagConstraints();
-//		gridBagConstraints_7.insets = new Insets(10, 0, 0, 0);
-//		gridBagConstraints_7.gridy = 3;
-//		gridBagConstraints_7.gridx = 1;
-//		getContentPane().add(bossComboBox, gridBagConstraints_7);
-		
 		superiTextField = new JTextField();
 		superiTextField.setColumns(11);
 		final GridBagConstraints gridBagConstraints_7 = new GridBagConstraints();
@@ -207,8 +177,6 @@ public class LeaveApplicationForm extends JDialog{
 		getContentPane().add(panel, gridBagConstraints_8);
 
 		final JButton submitButton = new JButton();
-		strArray = new ArrayList<String>();
-		HRDataPanel dPanel = new HRDataPanel();
 		submitButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//Staff Name
@@ -246,7 +214,6 @@ public class LeaveApplicationForm extends JDialog{
 		});
 		exitButton.setText("Exit");
 		panel.add(exitButton);
-		//
 	}
 
 	public Vector getVector() {

@@ -183,9 +183,6 @@ public class StaffDataPanel extends JPanel {
 					vecData.add(strName);
 					vecData.add(new Boolean(pr));
 					tableValueV.add(vecData);
-					
-//					System.out.println("vecData: "+vecData);
-//					System.out.println("tableValueV: "+tableValueV);
 				}
 				tableModel = new DefaultTableModel(tableValueV, tableColumnV);
 
