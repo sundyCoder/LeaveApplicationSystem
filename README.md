@@ -2,7 +2,7 @@
 
 ##![](http://i.imgur.com/S7xBFja.png)Leave Application System##
 A leave application system for a Human Resource Department.
-
+##Introduction##
 ###**1.How to run the demo?**###
 
 	Download the project.jar into your disk, and then double click it to run.
